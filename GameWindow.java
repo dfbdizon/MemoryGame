@@ -17,7 +17,8 @@ public class GameWindow extends JFrame {
 	private JPanel GamePanel;
 	public ArrayList<Card> cardButtons;;
 	public HashMap<String, ImageIcon> imageMap;
-	
+	public HashMap<Integer, Coordinates> coor;
+
 	ListeningThread lt;
 	SendingThread st;
 	
@@ -43,6 +44,8 @@ public class GameWindow extends JFrame {
 		setTitle("CS 142 MP2");
 		setBackgroundDisplay("assets/bg.png");
 		setResizable(false);
+
+		initCoor();
 
         layoutSetting();
 		startPanel();
@@ -219,4 +222,53 @@ public class GameWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
+	public initCoor(){
+		/* 1st Row */
+		coor.put(1, new Coordinates(90, 90));
+		coor.put(2, new Coordinates(202, 90));
+		coor.put(3, new Coordinates(314, 90));
+		coor.put(4, new Coordinates(426, 90));
+		coor.put(5, new Coordinates(538, 90));
+		coor.put(6, new Coordinates(650, 90));
+
+		/* 2nd Row */
+		coor.put(7, new Coordinates(90, 202));
+		coor.put(8, new Coordinates(202, 202));
+		coor.put(9, new Coordinates(314, 202));
+		coor.put(10, new Coordinates(426, 202));
+		coor.put(11, new Coordinates(538, 202));
+		coor.put(12, new Coordinates(650, 202));
+
+		/* 3rd Row */
+		coor.put(13, new Coordinates(90, 314));
+		coor.put(14, new Coordinates(202, 314));
+		coor.put(15, new Coordinates(314, 314));
+		coor.put(16, new Coordinates(426, 314));
+		coor.put(17, new Coordinates(538, 314));
+		coor.put(18, new Coordinates(650, 314));
+
+		/* 4th Row */
+		coor.put(19, new Coordinates(90, 426));
+		coor.put(20, new Coordinates(202, 426));
+		coor.put(21, new Coordinates(314, 426));
+		coor.put(22, new Coordinates(426, 426));
+		coor.put(23, new Coordinates(538, 426));
+		coor.put(24, new Coordinates(650, 426));
+
+		/* 5th Row */
+		coor.put(25, new Coordinates(90, 538));
+		coor.put(26, new Coordinates(202, 538));
+		coor.put(27, new Coordinates(314, 538));
+		coor.put(28, new Coordinates(426, 538));
+		coor.put(29, new Coordinates(538, 538));
+		coor.put(30, new Coordinates(650, 538));
+
+		/* 6th Row */
+		coor.put(31, new Coordinates(90, 650));
+		coor.put(32, new Coordinates(202, 650));
+		coor.put(33, new Coordinates(314, 650));
+		coor.put(34, new Coordinates(426, 650));
+		coor.put(35, new Coordinates(538, 650));
+		coor.put(36, new Coordinates(650, 650));
+	}
 }
