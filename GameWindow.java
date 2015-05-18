@@ -15,6 +15,8 @@ public class GameWindow extends JFrame {
     private JButton HelpButton;
     private JButton StartButton;
 	private JPanel GamePanel;
+	public ArrayList<Card> cardButtons;;
+	public HashMap<String, ImageIcon> imageMap;
 	
 	ListeningThread lt;
 	SendingThread st;
@@ -22,11 +24,14 @@ public class GameWindow extends JFrame {
     public GameWindow(ListeningThread l, SendingThread s) {
 		lt = l;
 		st = s;
+		cardButtons = new ArrayList<Card>();
+		imageMap = new HashMap<String, ImageIcon>();
 		
 		lookFeel();
 		cursorSetting();
 		musicSetting();
         initComponents();
+		
     }
                      
     private void initComponents() {
@@ -45,10 +50,55 @@ public class GameWindow extends JFrame {
         pack();
     }   
 	
-	public void gamePanel(){
+	private void gamePanel(){
 		GamePanel = new JPanel();
 		getContentPane().add(GamePanel);
 		setBackgroundDisplay("assets/green.jpg");
+		
+		setImages();
+		setCards();
+	}
+	
+	private void setImages(){
+		ImageIcon batman = new ImageIcon("assets/batman.png");
+		imageMap.put("batman", batman);
+		ImageIcon carnage = new ImageIcon("assets/carnage.png");
+		imageMap.put("carnage", carnage);
+		ImageIcon catwoman = new ImageIcon("assets/catwoman.png");
+		imageMap.put("catwoman", catwoman);
+		ImageIcon drdoom = new ImageIcon("assets/drdoom.png");
+		imageMap.put("drdoom", drdoom);
+		ImageIcon goomba = new ImageIcon("assets/goomba.png");
+		imageMap.put("goomba", goomba);
+		ImageIcon hulk = new ImageIcon("assets/hulk.png");
+		imageMap.put("hulk", hulk);
+		ImageIcon ironman = new ImageIcon("assets/ironman.png");
+		imageMap.put("ironman", ironman);
+		ImageIcon joker = new ImageIcon("assets/joker.png");
+		imageMap.put("joker", joker);
+		ImageIcon magneto = new ImageIcon("assets/magneto.png");
+		imageMap.put("magneto", magneto);
+		ImageIcon maleficent = new ImageIcon("assets/maleficent.png");
+		imageMap.put("maleficent", maleficent);
+		ImageIcon mario = new ImageIcon("assets/mario.png");
+		imageMap.put("mario", mario);
+		ImageIcon penguin = new ImageIcon("assets/penguin.png");
+		imageMap.put("penguin", penguin);
+		ImageIcon redskull = new ImageIcon("assets/redskull.png");
+		imageMap.put("redskull", redskull);
+		ImageIcon spiderman = new ImageIcon("assets/spiderman.png");
+		imageMap.put("spiderman", spiderman);
+		ImageIcon thor = new ImageIcon("assets/thor.png");
+		imageMap.put("thor", thor);
+		ImageIcon venom = new ImageIcon("assets/venom.png");
+		imageMap.put("venom", venom);
+		ImageIcon wolverine = new ImageIcon("assets/wolverine.png");
+		imageMap.put("wolverine", wolverine);
+		ImageIcon wonderwoman = new ImageIcon("assets/wonderwoman.png");
+		imageMap.put("wonderwoman", wonderwoman);
+	}
+	
+	public void setCards(){
 	}
 	
 	public void startPanel(){
@@ -57,7 +107,7 @@ public class GameWindow extends JFrame {
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
 		StartButton.setContentAreaFilled(false);
 		getContentPane().add(StartButton);
-        StartButton.setBounds(150, 190, 140, 70);
+        StartButton.setBounds(300, 310, 140, 70);
         StartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 StartButtonActionPerformed(evt);
@@ -69,7 +119,7 @@ public class GameWindow extends JFrame {
 		HelpButton.setBorder(BorderFactory.createEmptyBorder());
 		HelpButton.setContentAreaFilled(false);
 		getContentPane().add(HelpButton);
-        HelpButton.setBounds(150, 310, 140, 70);
+        HelpButton.setBounds(500, 310, 140, 70);
 		HelpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 HelpButtonActionPerformed(evt);
@@ -166,15 +216,6 @@ public class GameWindow extends JFrame {
 	public void layoutSetting(){
 		GroupLayout GameFrameLayout = new GroupLayout(GameFrame.getContentPane());
         GameFrame.getContentPane().setLayout(GameFrameLayout);
-        GameFrameLayout.setHorizontalGroup(
-            GameFrameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        GameFrameLayout.setVerticalGroup(
-            GameFrameLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
