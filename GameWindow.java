@@ -13,13 +13,16 @@ import java.awt.image.BufferedImage;
 public class GameWindow extends JFrame {
 	                  
     private JFrame GameFrame;
-    private JButton HelpButton;
+    public JButton ReadyButton;
     private JButton StartButton;
-	private JPanel GamePanel;
+	public JTextField textfield;
+	public JPanel GamePanel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
 	public ArrayList<Card> openCards = new ArrayList<Card>(2);
+	public boolean showReadyButton;
+	public String clientName;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -72,7 +75,7 @@ public class GameWindow extends JFrame {
 		
 		lookFeel();
 		cursorSetting();
-		musicSetting();
+		//musicSetting();
         initComponents();
 		
     }
@@ -80,11 +83,12 @@ public class GameWindow extends JFrame {
     private void initComponents() {
 
         GameFrame = new JFrame();
-        StartButton = new JButton();
-        HelpButton = new JButton();
+		GamePanel = new JPanel();
+		GamePanel.setVisible(false);
+        ReadyButton = new JButton();
+		showReadyButton = false;
 		
 		setTitle("CS 142 MP2");
-		setBackgroundDisplay("assets/bg.png");
 		setResizable(false);
 
 		initCoor();
@@ -99,7 +103,7 @@ public class GameWindow extends JFrame {
 	
 	private void gamePanel(){
 		setBackgroundDisplay("assets/green.jpg");
-		GamePanel = new JPanel();
+		GamePanel.setVisible(true);
 		//getContentPane().add(GamePanel);
 		
 		int x, y;
@@ -613,6 +617,8 @@ public class GameWindow extends JFrame {
 	}
 	
 	public void startPanel(){
+	    StartButton = new JButton();
+		setBackgroundDisplay("assets/bg.png");
 		Icon sb=new ImageIcon("assets/startbutton.png");
 		StartButton.setIcon(sb);
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
@@ -624,30 +630,33 @@ public class GameWindow extends JFrame {
                 StartButtonActionPerformed(evt);
             }
         });
-
-		Icon hb=new ImageIcon("assets/helpbutton.png");
-		HelpButton.setIcon(hb);
-		HelpButton.setBorder(BorderFactory.createEmptyBorder());
-		HelpButton.setContentAreaFilled(false);
-		getContentPane().add(HelpButton);
-        HelpButton.setBounds(500, 310, 140, 70);
-		HelpButton.addActionListener(new ActionListener() {
+	}
+	
+	public void readyPanel(){
+		ReadyButton = new JButton();
+		setBackgroundDisplay("assets/green.jpg");
+		Icon rb=new ImageIcon("assets/helpbutton.png");
+		ReadyButton.setIcon(rb);
+		ReadyButton.setBorder(BorderFactory.createEmptyBorder());
+		ReadyButton.setContentAreaFilled(false);
+		getContentPane().add(ReadyButton);
+        ReadyButton.setBounds(600, 310, 140, 70);
+		ReadyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                HelpButtonActionPerformed(evt);
+                ReadyButtonActionPerformed(evt);
             }
         });
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(null);
-		
-		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                st.stopNow();
-				lt.stopNow();
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            }
-        });
+		if(showReadyButton){
+			ReadyButton.setVisible(true);
+		}
+		else{
+			ReadyButton.setVisible(true);
+		}
+		textfield = new JTextField();
+		textfield.setFont(new Font("Arial", Font.BOLD,30));
+		textfield.setText("Enter your name!");
+		textfield.setBounds(200, 310, 400, 70);
+		getContentPane().add(textfield);
 	}
 	
 
@@ -678,15 +687,23 @@ public class GameWindow extends JFrame {
     private void StartButtonActionPerformed(ActionEvent evt) {                                            
         // TODO add your handling code here:
 		//let game panel be visible
-		StartButton.setVisible(false);
-		HelpButton.setVisible(false);
 		System.out.println("Start button pressed");
-		gamePanel();
+		StartButton.setVisible(false);
+		st.sendMessage("Client: Start");
+		readyPanel();
+		
     }  
 
-	private void HelpButtonActionPerformed(ActionEvent evt) {                                            
+	private void ReadyButtonActionPerformed(ActionEvent evt) {                                            
         // TODO add your handling code here:
-		//let help panel be visible
+		//let game panel be visible
+		clientName = textfield.getText().trim();
+		setTitle("CS 145 MP 2 - " + clientName);
+		st.sendMessage("Name: " + clientName);
+		ReadyButton.setVisible(false);
+		textfield.setVisible(false);
+		gamePanel();
+		
     }  
 	
 	public void stopNow(){
@@ -729,6 +746,19 @@ public class GameWindow extends JFrame {
 		GroupLayout GameFrameLayout = new GroupLayout(GameFrame.getContentPane());
         GameFrame.getContentPane().setLayout(GameFrameLayout);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(null);
+		
+		addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                st.stopNow();
+				lt.stopNow();
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+        });
+
         setSize(new Dimension(1000, 400));
 	}
 
@@ -747,13 +777,14 @@ public class GameWindow extends JFrame {
 						System.out.println("score: " + score);
 						openCards.get(0).setVisible(false);
 						openCards.get(1).setVisible(false);
+						st.sendMessage("score: " + score);
 					}
 				}
         	}
     	});
 	}
 
-	public void closeCards(){
+	public void closeCards(){ 
 		openCards.get(0).showBack();
 		openCards.get(1).showBack();
 		openCards.get(0).setEnabled(true);
@@ -762,6 +793,7 @@ public class GameWindow extends JFrame {
 		openCards.remove(0);
 		openCards = new ArrayList<Card>(2);
 		repaint();
+
 	}
 	
 	public void initCoor(){

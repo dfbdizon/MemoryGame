@@ -4,6 +4,9 @@ import java.util.*;
 
 public class MyServer {
 	public ArrayList<ClientHandler> clientList = new ArrayList<ClientHandler>();
+	public int numberOfPlayers;
+	public int numberOfReadyPlayers;
+	public int numberOfSessionPlayers;
 			
     public static void main(String args[]) {
 		MyServer server = new MyServer();
@@ -12,6 +15,8 @@ public class MyServer {
 	
 	public void start(){
 		int clientNumber = 1;
+		numberOfPlayers = 0;
+		numberOfReadyPlayers = 0;
 		
 		try{
 			System.out.println("S: Starting server...");
@@ -26,8 +31,8 @@ public class MyServer {
 				ClientHandler ch = new ClientHandler(s, clientName, this);
 				ch.start();
 				clientList.add(ch);
-	//			announce(clientName + " has connected.");
-	//			updateClientList();
+				announce(clientName + " has connected.");
+				updateClientList();
 			}
 			
 		} catch(Exception e) {
@@ -36,53 +41,47 @@ public class MyServer {
         }
 	}
 	
-/*	public void announce(String message){
+	public void announce(String message){
 		for(ClientHandler ch: clientList){
 			ch.sendMessage(message);
 		}
 	}
 	
-	public void whisper(String recipient, String message, String sender){
-		boolean sent = false;
-		for(ClientHandler ch: clientList){
-			if(ch.clientName.equals(recipient)){
-				ch.sendMessage("[" + sender + " whispers]:" + " " + message);
-				sent = true;
-				
-				for(ClientHandler client: clientList){
-					if(client.clientName.equals(sender)){
-						client.sendMessage("[You whispered to " + recipient + "]:" + " " + message);
-					}
-				}
-			}
+	public void addPlayer(){
+		numberOfPlayers++;
+		
+		if(numberOfPlayers >= 2){
+			announce("show play button");
 		}
-		if(sent == false){
-			for(ClientHandler ch: clientList){
-				if(ch.clientName.equals(sender)){
-					ch.sendMessage("Server message: User " + recipient + " is not found.");
-				}
-			}
+	}
+	
+	public void addReadyPlayer(){
+		numberOfReadyPlayers++;
+		
+		if(numberOfReadyPlayers == 1){
+			setSessionPlayers();
 		}
+	}
+	
+	public void setSessionPlayers(){
+		numberOfSessionPlayers = numberOfPlayers;
 	}
 	
 	public void removeClient(ClientHandler ch){
 		clientList.remove(ch);
 		announce(ch.clientName + " has disconnected.");	
 		updateClientList();
+		numberOfPlayers--;
+		numberOfReadyPlayers--;
 	}
 	
 	public void updateClientList(){
 		String clients = "";
 		for(ClientHandler ch: clientList){
 			clients = clients + ch.clientName;
-			if(ch.clientStatus != null){
-				clients = clients + " - " + ch.clientStatus + "*";
-			}
-			else{
-				clients = clients + "*";
-			}
+			clients = clients + " - " + ch.clientScore + "*";
 		}
 		String updatedClientList = "<clients> " + clients;
 		announce(updatedClientList);
-	} */
+	} 
 }

@@ -5,7 +5,7 @@ import java.util.*;
 public class ClientHandler extends Thread{
 	MyConnection mc;
 	String clientName;
-	String clientStatus;
+	int clientScore;
 	MyServer server;
 	
 	public ClientHandler(Socket socket, String clientName, MyServer server){
@@ -17,17 +17,12 @@ public class ClientHandler extends Thread{
 	
 	public void changeClientName(String newName){
 		clientName = newName;
-		changeClientWindow(clientName);
-	//	server.updateClientList();
+		server.updateClientList();
 	}
 	
-	public void changeClientStatus(String newStatus){
-		clientStatus = newStatus;
-	//	server.updateClientList();
-	}
-	
-	public void changeClientWindow(String client){
-		mc.sendMessage("<windowtitle> " + client);
+	public void changeClientScore(int score){
+		clientScore = score;
+		server.updateClientList();
 	}
 	
 	public void run(){
@@ -49,69 +44,30 @@ public class ClientHandler extends Thread{
 	
 	public void evaluate(String mesg){
 		String msg = mesg.trim();
-		if(msg.startsWith("/changename ")){
-			String newName = msg.substring(12);
-			if(msg.length() == 12){
-				sendMessage("Server message: No name found");
-			}
-			else if(newName.contains(" ")){
-				sendMessage("Server message: Invalid name");
-			}
-			else{
-			//	server.announce("Server message: " + clientName + " has changed name to " + newName);
-				changeClientName(newName);
-			}
+		if(msg.startsWith("Name: ")){
+			String newName = msg.substring(7);
+			changeClientName(newName);
 		}
-		else if(msg.startsWith("/changestatus ")){
+		else if(msg.equals("Client: Start")){
+			server.addPlayer();
+		}
+		else if(msg.startsWith("score: ")){
+			int clientScore = msg.substring(8);
+			changeClientScore(clientScore);
+		}
+		else{
+			//server.announce(clientName + ": " + msg);
+		}
+	/*	else if(msg.startsWith("/changestatus ")){
 			if(msg.length() == 14){
 				sendMessage("Server message: No status found");
 			}
 			else{
 				String newStatus = msg.substring(14);
-			//	server.announce("Server message: " + clientName + " has changed status to \"" + newStatus + "\"");
+				server.announce("Server message: " + clientName + " has changed status to \"" + newStatus + "\"");
 				changeClientStatus(newStatus);
 			}
-		}
-		else if(msg.startsWith("/whisper ")){
-			String recipient = "";
-			String message = "";
-			
-			if(msg.length() == 9){
-				sendMessage("Server message: Invalid command " + msg);
-			}
-			else{
-				char[] temp = msg.toCharArray();
-				int x = 9;
-				
-				if(msg.substring(9).contains(" ")){
-					while(temp[x] != ' '){
-						recipient = recipient + String.valueOf(temp[x]);
-						x++;
-					}
-					
-					x++;
-					
-					if(msg.length() <= x){
-						sendMessage("Server message: Invalid command " + msg);
-					}
-					else{
-						message = msg.substring(x);				
-	//					server.whisper(recipient, message, clientName);
-					}
-				}
-				else{
-					sendMessage("Server message: Invalid command " + msg);
-				}
-			}
-		}
-		else if(msg.startsWith("/")){
-			sendMessage("Server message: Invalid command " + msg);
-		}
-		else if(msg.length() == 0){
-		}
-		else{
-	//		server.announce(clientName + ": " + msg);
-		}
+		}*/
 	}
 	
 	public void changeName(String msg){
