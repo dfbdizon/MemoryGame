@@ -243,7 +243,7 @@ public class GameWindow extends JFrame {
 		joker1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 joker1.showFront();
-            	if(openCards.size() > 2) closeCards();
+            	if(openCards.size() == 2) closeCards();
             	openCards.add(joker1);
                 joker1.setEnabled(false);
                 cardOpen();
