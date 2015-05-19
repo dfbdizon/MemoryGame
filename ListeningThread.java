@@ -15,12 +15,19 @@ public class ListeningThread extends Thread{
 	public void run(){
 		String reply;
 		while(ongoing){
-	/*		reply = mc.getMessage();
+			reply = mc.getMessage();
 			if(reply.equals("end")){
 				gw.stopNow();
 				ongoing = false;
 			}
-			else if(reply.startsWith("<windowtitle> ")){
+			else if(reply.equals("show play button")){
+				System.out.println("Show play button");
+				if(!gw.showReadyButton){
+					gw.ReadyButton.setVisible(true);
+				}
+				gw.showReadyButton = true;
+			}
+		/*	else if(reply.startsWith("<windowtitle> ")){
 				String title = reply.substring(14);
 				gw.setTitle(title);
 			}

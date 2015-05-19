@@ -12,13 +12,14 @@ import java.io.*;
 public class GameWindow extends JFrame {
 	                  
     private JFrame GameFrame;
-    private JButton ReadyButton;
+    public JButton ReadyButton;
     private JButton StartButton;
-	private JPanel GamePanel;
+	public JPanel GamePanel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
 	public ArrayList<Card> openCards = new ArrayList<Card>();
+	public boolean showReadyButton;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -77,7 +78,10 @@ public class GameWindow extends JFrame {
     private void initComponents() {
 
         GameFrame = new JFrame();
+		GamePanel = new JPanel();
+		GamePanel.setVisible(false);
         ReadyButton = new JButton();
+		showReadyButton = false;
 		
 		setTitle("CS 142 MP2");
 		setResizable(false);
@@ -94,7 +98,7 @@ public class GameWindow extends JFrame {
 	
 	private void gamePanel(){
 		setBackgroundDisplay("assets/green.jpg");
-		GamePanel = new JPanel();
+		GamePanel.setVisible(true);
 		//getContentPane().add(GamePanel);
 		
 		int x, y;
@@ -588,6 +592,12 @@ public class GameWindow extends JFrame {
                 ReadyButtonActionPerformed(evt);
             }
         });
+		if(showReadyButton){
+			ReadyButton.setVisible(true);
+		}
+		else{
+			ReadyButton.setVisible(false);
+		}
 	}
 	
 
@@ -620,6 +630,7 @@ public class GameWindow extends JFrame {
 		//let game panel be visible
 		System.out.println("Start button pressed");
 		StartButton.setVisible(false);
+		st.sendMessage("Client: Start");
 		readyPanel();
 		
     }  

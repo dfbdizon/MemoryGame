@@ -62,56 +62,22 @@ public class ClientHandler extends Thread{
 				changeClientName(newName);
 			}
 		}
-		else if(msg.startsWith("/changestatus ")){
+		else if(msg.equals("Client: Start")){
+			server.addPlayer();
+		}
+		else{
+			server.announce(clientName + ": " + msg);
+		}
+	/*	else if(msg.startsWith("/changestatus ")){
 			if(msg.length() == 14){
 				sendMessage("Server message: No status found");
 			}
 			else{
 				String newStatus = msg.substring(14);
-			//	server.announce("Server message: " + clientName + " has changed status to \"" + newStatus + "\"");
+				server.announce("Server message: " + clientName + " has changed status to \"" + newStatus + "\"");
 				changeClientStatus(newStatus);
 			}
-		}
-		else if(msg.startsWith("/whisper ")){
-			String recipient = "";
-			String message = "";
-			
-			if(msg.length() == 9){
-				sendMessage("Server message: Invalid command " + msg);
-			}
-			else{
-				char[] temp = msg.toCharArray();
-				int x = 9;
-				
-				if(msg.substring(9).contains(" ")){
-					while(temp[x] != ' '){
-						recipient = recipient + String.valueOf(temp[x]);
-						x++;
-					}
-					
-					x++;
-					
-					if(msg.length() <= x){
-						sendMessage("Server message: Invalid command " + msg);
-					}
-					else{
-						message = msg.substring(x);				
-	//					server.whisper(recipient, message, clientName);
-					}
-				}
-				else{
-					sendMessage("Server message: Invalid command " + msg);
-				}
-			}
-		}
-		else if(msg.startsWith("/")){
-			sendMessage("Server message: Invalid command " + msg);
-		}
-		else if(msg.length() == 0){
-		}
-		else{
-	//		server.announce(clientName + ": " + msg);
-		}
+		}*/
 	}
 	
 	public void changeName(String msg){
