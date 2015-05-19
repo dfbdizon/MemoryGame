@@ -753,12 +753,13 @@ public class GameWindow extends JFrame {
 				System.out.println("score: " + score);
 				openCards.get(0).setVisible(false);
 				openCards.get(1).setVisible(false);
+				st.sendMessage("score: " + score);
 			}
 		}
 		repaint();
 	}
 
-	public void closeCards(){
+	public void closeCards(){ 
 		openCards.get(0).showBack();
 		openCards.get(1).showBack();
 		openCards.get(0).setEnabled(true);

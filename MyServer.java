@@ -79,12 +79,7 @@ public class MyServer {
 		String clients = "";
 		for(ClientHandler ch: clientList){
 			clients = clients + ch.clientName;
-			if(ch.clientStatus != null){
-				clients = clients + " - " + ch.clientStatus + "*";
-			}
-			else{
-				clients = clients + "*";
-			}
+			clients = clients + " - " + ch.clientScore + "*";
 		}
 		String updatedClientList = "<clients> " + clients;
 		announce(updatedClientList);

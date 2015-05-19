@@ -5,7 +5,7 @@ import java.util.*;
 public class ClientHandler extends Thread{
 	MyConnection mc;
 	String clientName;
-	String clientStatus;
+	int clientScore;
 	MyServer server;
 	
 	public ClientHandler(Socket socket, String clientName, MyServer server){
@@ -17,12 +17,12 @@ public class ClientHandler extends Thread{
 	
 	public void changeClientName(String newName){
 		clientName = newName;
-	//	server.updateClientList();
+		server.updateClientList();
 	}
 	
-	public void changeClientStatus(String newStatus){
-		clientStatus = newStatus;
-	//	server.updateClientList();
+	public void changeClientScore(int score){
+		clientScore = score;
+		server.updateClientList();
 	}
 	
 	public void run(){
@@ -50,6 +50,10 @@ public class ClientHandler extends Thread{
 		}
 		else if(msg.equals("Client: Start")){
 			server.addPlayer();
+		}
+		else if(msg.startsWith("score: ")){
+			int clientScore = msg.substring(8);
+			changeClientScore(clientScore);
 		}
 		else{
 			//server.announce(clientName + ": " + msg);
