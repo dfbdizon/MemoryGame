@@ -84,6 +84,8 @@ public class GameWindow extends JFrame {
 		setResizable(false);
 
 		initCoor();
+		setImages();
+		setCards();
 
         layoutSetting();
 		startPanel();
@@ -92,17 +94,16 @@ public class GameWindow extends JFrame {
     }   
 	
 	private void gamePanel(){
-		setBackgroundDisplay("assets/green.jpg");
 		GamePanel = new JPanel();
-		//getContentPane().add(GamePanel);
-		
+		getContentPane().add(GamePanel);
+		setBackgroundDisplay("assets/green.jpg");	
 		int x, y;
 		Card card;
 
-		setImages();
-		setCards();
+		Collections.shuffle(cardList);
+
 		GamePanel.setLayout(null);
-		//GamePanel.setBounds(0, 0, 1000, 790);
+		GamePanel.setBounds(0, 0, 1117, 670);
 		for(int i = 0; i < cardList.size(); i++){
 			card = cardList.get(i);
 			x = coor.get(i+1).getX();
@@ -110,9 +111,9 @@ public class GameWindow extends JFrame {
 			System.out.print(card.type + ": ");
 			System.out.println(x + ", " + y);
 			card.setBounds(x, y, 100, 100);
-			getContentPane().add(card);
+			GamePanel.add(card);
 		}
-		//GamePanel.setVisible(true);
+		GamePanel.setVisible(true);
 	}
 	
 	private void setImages(){
@@ -231,8 +232,6 @@ public class GameWindow extends JFrame {
 		cardList.add(venom2);
 		cardList.add(wolverine2);
 		cardList.add(wonderwoman2);		
-		
-		Collections.shuffle(cardList);
 	}
 	
 	public void startPanel(){
@@ -315,7 +314,7 @@ public class GameWindow extends JFrame {
 	public void stopNow(){
 		st.stopNow();
 		lt.stopNow();
-		`spatchEvent(new WindowEvent(lt.gw, WindowEvent.WINDOW_CLOSING));
+		dispatchEvent(new WindowEvent(lt.gw, WindowEvent.WINDOW_CLOSING));
 	}  
 	
 	public void setBackgroundDisplay(String filename){
@@ -352,55 +351,56 @@ public class GameWindow extends JFrame {
 		GroupLayout GameFrameLayout = new GroupLayout(GameFrame.getContentPane());
         GameFrame.getContentPane().setLayout(GameFrameLayout);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(new Dimension(1000, 400));
 	}
 	
 	public void initCoor(){
 		/* 1st Row */
-		coor.put(1, new Coordinates(90, 90));
-		coor.put(2, new Coordinates(202, 90));
-		coor.put(3, new Coordinates(314, 90));
-		coor.put(4, new Coordinates(426, 90));
-		coor.put(5, new Coordinates(538, 90));
-		coor.put(6, new Coordinates(650, 90));
+		coor.put(1, new Coordinates(90, 10));
+		coor.put(2, new Coordinates(200, 10));
+		coor.put(3, new Coordinates(310, 10));
+		coor.put(4, new Coordinates(420, 10));
+		coor.put(5, new Coordinates(530, 10));
+		coor.put(6, new Coordinates(640, 10));
 
 		/* 2nd Row */
-		coor.put(7, new Coordinates(90, 202));
-		coor.put(8, new Coordinates(202, 202));
-		coor.put(9, new Coordinates(314, 202));
-		coor.put(10, new Coordinates(426, 202));
-		coor.put(11, new Coordinates(538, 202));
-		coor.put(12, new Coordinates(650, 202));
+		coor.put(7, new Coordinates(90, 120));
+		coor.put(8, new Coordinates(200, 120));
+		coor.put(9, new Coordinates(310, 120));
+		coor.put(10, new Coordinates(420, 120));
+		coor.put(11, new Coordinates(530, 120));
+		coor.put(12, new Coordinates(640, 120));
 
 		/* 3rd Row */
-		coor.put(13, new Coordinates(90, 314));
-		coor.put(14, new Coordinates(202, 314));
-		coor.put(15, new Coordinates(314, 314));
-		coor.put(16, new Coordinates(426, 314));
-		coor.put(17, new Coordinates(538, 314));
-		coor.put(18, new Coordinates(650, 314));
+		coor.put(13, new Coordinates(90, 230));
+		coor.put(14, new Coordinates(200, 230));
+		coor.put(15, new Coordinates(310, 230));
+		coor.put(16, new Coordinates(420, 230));
+		coor.put(17, new Coordinates(530, 230));
+		coor.put(18, new Coordinates(640, 230));
 
 		/* 4th Row */
-		coor.put(19, new Coordinates(90, 426));
-		coor.put(20, new Coordinates(202, 426));
-		coor.put(21, new Coordinates(314, 426));
-		coor.put(22, new Coordinates(426, 426));
-		coor.put(23, new Coordinates(538, 426));
-		coor.put(24, new Coordinates(650, 426));
+		coor.put(19, new Coordinates(90, 340));
+		coor.put(20, new Coordinates(200, 340));
+		coor.put(21, new Coordinates(310, 340));
+		coor.put(22, new Coordinates(420, 340));
+		coor.put(23, new Coordinates(530, 340));
+		coor.put(24, new Coordinates(640, 340));
 
 		/* 5th Row */
-		coor.put(25, new Coordinates(90, 538));
-		coor.put(26, new Coordinates(202, 538));
-		coor.put(27, new Coordinates(314, 538));
-		coor.put(28, new Coordinates(426, 538));
-		coor.put(29, new Coordinates(538, 538));
-		coor.put(30, new Coordinates(650, 538));
+		coor.put(25, new Coordinates(90, 450));
+		coor.put(26, new Coordinates(200, 450));
+		coor.put(27, new Coordinates(310, 450));
+		coor.put(28, new Coordinates(420, 450));
+		coor.put(29, new Coordinates(530, 450));
+		coor.put(30, new Coordinates(640, 450));
 
 		/* 6th Row */
-		coor.put(31, new Coordinates(90, 650));
-		coor.put(32, new Coordinates(202, 650));
-		coor.put(33, new Coordinates(314, 650));
-		coor.put(34, new Coordinates(426, 650));
-		coor.put(35, new Coordinates(538, 650));
-		coor.put(36, new Coordinates(650, 650));
+		coor.put(31, new Coordinates(90, 560));
+		coor.put(32, new Coordinates(200, 560));
+		coor.put(33, new Coordinates(310, 560));
+		coor.put(34, new Coordinates(420, 560));
+		coor.put(35, new Coordinates(530, 560));
+		coor.put(36, new Coordinates(640, 560));
 	}
 }
