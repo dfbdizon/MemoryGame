@@ -16,6 +16,7 @@ class Card extends JButton{
 		this.type = type;
 		
 		setIcon(backImage);
+		setDisabledIcon(front);
 		setMargin(new Insets(0, 0, 0, 0));
 		setIconTextGap(0);
 		setBorderPainted(false);
