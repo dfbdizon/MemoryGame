@@ -17,7 +17,7 @@ public class GameWindow extends JFrame {
 	private JPanel GamePanel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
-	public HashMap<Integer, Coordinates> coor;
+	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
 
 	ListeningThread lt;
 	SendingThread st;
@@ -92,12 +92,27 @@ public class GameWindow extends JFrame {
     }   
 	
 	private void gamePanel(){
-		GamePanel = new JPanel();
-		getContentPane().add(GamePanel);
 		setBackgroundDisplay("assets/green.jpg");
+		GamePanel = new JPanel();
+		//getContentPane().add(GamePanel);
 		
+		int x, y;
+		Card card;
+
 		setImages();
 		setCards();
+		GamePanel.setLayout(null);
+		//GamePanel.setBounds(0, 0, 1000, 790);
+		for(int i = 0; i < cardList.size(); i++){
+			card = cardList.get(i);
+			x = coor.get(i+1).getX();
+			y = coor.get(i+1).getY();
+			System.out.print(card.type + ": ");
+			System.out.println(x + ", " + y);
+			card.setBounds(x, y, 100, 100);
+			getContentPane().add(card);
+		}
+		//GamePanel.setVisible(true);
 	}
 	
 	private void setImages(){
@@ -288,6 +303,7 @@ public class GameWindow extends JFrame {
 		//let game panel be visible
 		StartButton.setVisible(false);
 		HelpButton.setVisible(false);
+		System.out.println("Start button pressed");
 		gamePanel();
     }  
 
@@ -299,7 +315,7 @@ public class GameWindow extends JFrame {
 	public void stopNow(){
 		st.stopNow();
 		lt.stopNow();
-		dispatchEvent(new WindowEvent(lt.gw, WindowEvent.WINDOW_CLOSING));
+		`spatchEvent(new WindowEvent(lt.gw, WindowEvent.WINDOW_CLOSING));
 	}  
 	
 	public void setBackgroundDisplay(String filename){
@@ -338,7 +354,7 @@ public class GameWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
-	public initCoor(){
+	public void initCoor(){
 		/* 1st Row */
 		coor.put(1, new Coordinates(90, 90));
 		coor.put(2, new Coordinates(202, 90));
