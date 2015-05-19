@@ -94,9 +94,10 @@ public class GameWindow extends JFrame {
     }   
 	
 	private void gamePanel(){
+		setBackgroundDisplay("assets/green.jpg");
 		GamePanel = new JPanel();
 		getContentPane().add(GamePanel);
-		setBackgroundDisplay("assets/green.jpg");	
+		
 		int x, y;
 		Card card;
 
@@ -113,7 +114,7 @@ public class GameWindow extends JFrame {
 			card.setBounds(x, y, 100, 100);
 			GamePanel.add(card);
 		}
-		GamePanel.setVisible(true);
+		//GamePanel.setVisible(true);
 	}
 	
 	private void setImages(){
