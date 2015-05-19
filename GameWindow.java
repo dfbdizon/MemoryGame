@@ -18,11 +18,13 @@ public class GameWindow extends JFrame {
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
-	public ArrayList<Card> openCards = new ArrayList<Card>();
+	public ArrayList<Card> openCards = new ArrayList<Card>(2);
 
 	ListeningThread lt;
 	SendingThread st;
 	
+	int score = 0;
+
 	//cards
 	Card batman1;
 	Card carnage1;
@@ -110,8 +112,6 @@ public class GameWindow extends JFrame {
 			card = cardList.get(i);
 			x = coor.get(i+1).getX();
 			y = coor.get(i+1).getY();
-			System.out.print(card.type + ": ");
-			System.out.println(x + ", " + y);
 			card.setBounds(x, y, 100, 100);
 			//GamePanel.add(card);
 			getContentPane().add(card);
@@ -168,7 +168,8 @@ public class GameWindow extends JFrame {
             	batman1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(batman1);
-                cardOpen(batman1);
+           		batman1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -178,7 +179,8 @@ public class GameWindow extends JFrame {
             	carnage1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(carnage1);
-                cardOpen(carnage1);
+            	carnage1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -188,7 +190,8 @@ public class GameWindow extends JFrame {
                 catwoman1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(catwoman1);
-                cardOpen(catwoman1);
+            	catwoman1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -198,7 +201,8 @@ public class GameWindow extends JFrame {
                 drdoom1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(drdoom1);
-                cardOpen(drdoom1);
+                drdoom1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -208,7 +212,8 @@ public class GameWindow extends JFrame {
                 goomba1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(goomba1);
-                cardOpen(goomba1);
+                goomba1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -218,7 +223,8 @@ public class GameWindow extends JFrame {
                 hulk1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(hulk1);
-                cardOpen(hulk1);
+                hulk1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -228,7 +234,8 @@ public class GameWindow extends JFrame {
                 ironman1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(ironman1);
-                cardOpen(ironman1);
+                ironman1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -238,7 +245,8 @@ public class GameWindow extends JFrame {
                 joker1.showFront();
             	if(openCards.size() > 2) closeCards();
             	openCards.add(joker1);
-                cardOpen(joker1);
+                joker1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -247,8 +255,9 @@ public class GameWindow extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 magneto1.showFront();
             	if(openCards.size() == 2) closeCards();
+            	magneto1.setEnabled(false);
             	openCards.add(magneto1);
-                cardOpen(magneto1);
+                cardOpen();
             }
         });
 
@@ -258,7 +267,8 @@ public class GameWindow extends JFrame {
                 maleficent1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(maleficent1);
-                cardOpen(maleficent1);
+                maleficent1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -268,7 +278,8 @@ public class GameWindow extends JFrame {
                 mario1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(mario1);
-                cardOpen(mario1);
+                mario1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -278,7 +289,8 @@ public class GameWindow extends JFrame {
                 penguin1.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(penguin1);
-                cardOpen(penguin1);
+                penguin1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -288,7 +300,8 @@ public class GameWindow extends JFrame {
                 redskull1.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(redskull1);
-                cardOpen(redskull1);
+                redskull1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -298,7 +311,8 @@ public class GameWindow extends JFrame {
                 spiderman1.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(spiderman1);
-                cardOpen(spiderman1);
+                spiderman1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -308,7 +322,8 @@ public class GameWindow extends JFrame {
                 thor1.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(thor1);
-                cardOpen(thor1);
+                thor1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -318,7 +333,8 @@ public class GameWindow extends JFrame {
                 venom1.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(venom1);
-                cardOpen(venom1);
+                venom1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -328,7 +344,8 @@ public class GameWindow extends JFrame {
                 wolverine1.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(wolverine1);
-                cardOpen(wolverine1);
+                wolverine1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -338,7 +355,8 @@ public class GameWindow extends JFrame {
                 wonderwoman1.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(wonderwoman1);
-                cardOpen(wonderwoman1);
+                wonderwoman1.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -348,7 +366,8 @@ public class GameWindow extends JFrame {
                 batman2.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(batman2);
-                cardOpen(batman2);
+                batman2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -358,7 +377,8 @@ public class GameWindow extends JFrame {
                 carnage2.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(carnage2);
-                cardOpen(carnage2);
+                carnage2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -368,7 +388,8 @@ public class GameWindow extends JFrame {
                 catwoman2.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(catwoman2);
-                cardOpen(catwoman2);
+                catwoman2.setEnabled(false);
+                cardOpen();
             }
         });
 		
@@ -378,7 +399,8 @@ public class GameWindow extends JFrame {
                 drdoom2.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(drdoom2);
-                cardOpen(drdoom2);
+                drdoom2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -388,7 +410,8 @@ public class GameWindow extends JFrame {
                 goomba2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(goomba2);
-                cardOpen(goomba2);
+                goomba2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -398,7 +421,8 @@ public class GameWindow extends JFrame {
                 hulk2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(hulk2);
-                cardOpen(hulk2);
+                hulk2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -408,7 +432,8 @@ public class GameWindow extends JFrame {
                 ironman2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(ironman2);
-                cardOpen(ironman2);
+                ironman2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -418,7 +443,8 @@ public class GameWindow extends JFrame {
                 joker2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(joker2);
-                cardOpen(joker2);
+                joker2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -428,7 +454,8 @@ public class GameWindow extends JFrame {
                 magneto2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(magneto2);
-                cardOpen(magneto2);
+                magneto2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -438,7 +465,8 @@ public class GameWindow extends JFrame {
                 maleficent2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(maleficent2);
-                cardOpen(maleficent2);
+                maleficent2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -448,7 +476,8 @@ public class GameWindow extends JFrame {
                 mario2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(mario2);
-                cardOpen(mario2);
+                mario2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -458,7 +487,8 @@ public class GameWindow extends JFrame {
                 penguin2.showFront();
             	if(openCards.size() == 2) closeCards();
                 openCards.add(penguin2);
-                cardOpen(penguin2);
+                penguin2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -468,7 +498,8 @@ public class GameWindow extends JFrame {
                 redskull2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(redskull2);
-                cardOpen(redskull2);
+                redskull2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -478,7 +509,8 @@ public class GameWindow extends JFrame {
                 spiderman2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(spiderman2);
-                cardOpen(spiderman2);
+                spiderman2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -488,7 +520,8 @@ public class GameWindow extends JFrame {
                 thor2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(thor2);
-                cardOpen(thor2);
+                thor2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -498,7 +531,8 @@ public class GameWindow extends JFrame {
                 venom2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(venom2);
-                cardOpen(venom2);
+                venom2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -508,7 +542,8 @@ public class GameWindow extends JFrame {
                 wolverine2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(wolverine2);
-                cardOpen(wolverine2);
+                wolverine2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -518,7 +553,8 @@ public class GameWindow extends JFrame {
                 wonderwoman2.showFront();
             	if(openCards.size() == 2) closeCards();
             	openCards.add(wonderwoman2);
-                cardOpen(wonderwoman2);
+                wonderwoman2.setEnabled(false);
+                cardOpen();
             }
         });
 
@@ -680,17 +716,26 @@ public class GameWindow extends JFrame {
         setSize(new Dimension(1000, 400));
 	}
 
-	public void cardOpen(Card card){
-		System.out.println("clicked card");
-		System.out.println(card.type);
-		//card.showBack();
+	public void cardOpen(){
+		if(openCards.size() == 2){
+			if(openCards.get(0).type.equals(openCards.get(1).type)){
+				score += 2;
+				System.out.println("score: " + score);
+				openCards.get(0).setVisible(false);
+				openCards.get(1).setVisible(false);
+			}
+		}
 		repaint();
 	}
 
 	public void closeCards(){
 		openCards.get(0).showBack();
 		openCards.get(1).showBack();
-		openCards = new ArrayList<Card>();
+		openCards.get(0).setEnabled(true);
+		openCards.get(1).setEnabled(true);
+		openCards.remove(0);
+		openCards.remove(0);
+		openCards = new ArrayList<Card>(2);
 		repaint();
 	}
 	
