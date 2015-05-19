@@ -24,6 +24,7 @@ class Card extends JButton{
 		setSize(backImage.getImage().getWidth(null), backImage.getImage().getHeight(null));
 		setBorder(BorderFactory.createEmptyBorder());
 		setContentAreaFilled(false);		
+		setVisible(true);
 	}
 	
 	public void showFront(){
