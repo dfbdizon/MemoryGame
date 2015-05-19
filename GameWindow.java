@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.net.URL;
 import javax.sound.sampled.*;
 import java.io.*;
+import java.awt.image.BufferedImage;
 @SuppressWarnings("unchecked")
 	
 public class GameWindow extends JFrame {
@@ -117,6 +118,21 @@ public class GameWindow extends JFrame {
 			getContentPane().add(card);
 		}
 		//GamePanel.setVisible(true);
+
+		ImageIcon scoreImg = new ImageIcon("assets/score_panel2.png");
+		JLabel scorePanel = new JLabel();
+		scorePanel.setIcon(scoreImg);
+		/*JPanel scorePanel = new JPanel();
+		try{
+			BufferedImage scoreImg = ImageIO.read(new File("assets/score_panel2.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(scoreImg));
+			scorePanel.add(picLabel);
+		} catch(Exception e){
+			e.printStackTrace();
+		}*/
+
+		scorePanel.setBounds(830, 10, 267, 650);
+		getContentPane().add(scorePanel);
 	}
 	
 	private void setImages(){
@@ -717,15 +733,24 @@ public class GameWindow extends JFrame {
 	}
 
 	public void cardOpen(){
-		if(openCards.size() == 2){
-			if(openCards.get(0).type.equals(openCards.get(1).type)){
-				score += 2;
-				System.out.println("score: " + score);
-				openCards.get(0).setVisible(false);
-				openCards.get(1).setVisible(false);
-			}
-		}
 		repaint();
+		java.awt.EventQueue.invokeLater(new Runnable() {
+	        public void run() {
+	            if(openCards.size() == 2){
+					if(openCards.get(0).type.equals(openCards.get(1).type)){
+						try{
+			        		Thread.sleep(500);
+			        	} catch(Exception e){
+			        		e.printStackTrace();
+			        	}
+						score += 2;
+						System.out.println("score: " + score);
+						openCards.get(0).setVisible(false);
+						openCards.get(1).setVisible(false);
+					}
+				}
+        	}
+    	});
 	}
 
 	public void closeCards(){
