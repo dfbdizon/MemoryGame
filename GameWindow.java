@@ -18,6 +18,7 @@ public class GameWindow extends JFrame {
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
+	public ArrayList<Card> openCards = new ArrayList<Card>();
 
 	ListeningThread lt;
 	SendingThread st;
@@ -96,15 +97,15 @@ public class GameWindow extends JFrame {
 	private void gamePanel(){
 		setBackgroundDisplay("assets/green.jpg");
 		GamePanel = new JPanel();
-		getContentPane().add(GamePanel);
+		//getContentPane().add(GamePanel);
 		
 		int x, y;
 		Card card;
 
 		Collections.shuffle(cardList);
 
-		GamePanel.setLayout(null);
-		GamePanel.setBounds(0, 0, 1117, 670);
+		//GamePanel.setLayout(null);
+		//GamePanel.setBounds(0, 0, 1117, 670);
 		for(int i = 0; i < cardList.size(); i++){
 			card = cardList.get(i);
 			x = coor.get(i+1).getX();
@@ -112,7 +113,8 @@ public class GameWindow extends JFrame {
 			System.out.print(card.type + ": ");
 			System.out.println(x + ", " + y);
 			card.setBounds(x, y, 100, 100);
-			GamePanel.add(card);
+			//GamePanel.add(card);
+			getContentPane().add(card);
 		}
 		//GamePanel.setVisible(true);
 	}
@@ -161,42 +163,365 @@ public class GameWindow extends JFrame {
 	public void setCards(){
 		ImageIcon cardBack = imageMap.get("back");
 		batman1 = new Card(imageMap.get("batman"), cardBack, "batman");
+		batman1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	batman1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(batman1);
+                cardOpen(batman1);
+            }
+        });
+
 		carnage1 = new Card(imageMap.get("carnage"), cardBack, "carnage");
+		carnage1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	carnage1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(carnage1);
+                cardOpen(carnage1);
+            }
+        });
+
 		catwoman1 = new Card(imageMap.get("catwoman"), cardBack, "catwoman");
+		catwoman1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                catwoman1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(catwoman1);
+                cardOpen(catwoman1);
+            }
+        });
+
 		drdoom1 = new Card(imageMap.get("drdoom"), cardBack, "drdoom");
+		drdoom1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                drdoom1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(drdoom1);
+                cardOpen(drdoom1);
+            }
+        });
+
 		goomba1 = new Card(imageMap.get("goomba"), cardBack, "goomba");
+		goomba1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                goomba1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(goomba1);
+                cardOpen(goomba1);
+            }
+        });
+
 		hulk1 = new Card(imageMap.get("hulk"), cardBack, "hulk");
+		hulk1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                hulk1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(hulk1);
+                cardOpen(hulk1);
+            }
+        });
+
 		ironman1 = new Card(imageMap.get("ironman"), cardBack, "ironman");
+		ironman1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                ironman1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(ironman1);
+                cardOpen(ironman1);
+            }
+        });
+
 		joker1 = new Card(imageMap.get("joker"), cardBack, "joker");
+		joker1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                joker1.showFront();
+            	if(openCards.size() > 2) closeCards();
+            	openCards.add(joker1);
+                cardOpen(joker1);
+            }
+        });
+
 		magneto1 = new Card(imageMap.get("magneto"), cardBack, "magneto");
+		magneto1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                magneto1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(magneto1);
+                cardOpen(magneto1);
+            }
+        });
+
 		maleficent1 = new Card(imageMap.get("maleficent"), cardBack, "maleficent");
+		maleficent1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                maleficent1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(maleficent1);
+                cardOpen(maleficent1);
+            }
+        });
+
 		mario1 = new Card(imageMap.get("mario"), cardBack, "mario");
+		mario1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                mario1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(mario1);
+                cardOpen(mario1);
+            }
+        });
+
 		penguin1 = new Card(imageMap.get("penguin"), cardBack, "penguin");
+		penguin1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                penguin1.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(penguin1);
+                cardOpen(penguin1);
+            }
+        });
+
 		redskull1 = new Card(imageMap.get("redskull"), cardBack, "redskull");
+		redskull1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                redskull1.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(redskull1);
+                cardOpen(redskull1);
+            }
+        });
+
 		spiderman1 = new Card(imageMap.get("spiderman"), cardBack, "spiderman");
+		spiderman1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                spiderman1.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(spiderman1);
+                cardOpen(spiderman1);
+            }
+        });
+
 		thor1 = new Card(imageMap.get("thor"), cardBack, "thor");
+		thor1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                thor1.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(thor1);
+                cardOpen(thor1);
+            }
+        });
+
 		venom1 = new Card(imageMap.get("venom"), cardBack, "venom");
+		venom1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                venom1.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(venom1);
+                cardOpen(venom1);
+            }
+        });
+
 		wolverine1 = new Card(imageMap.get("wolverine"), cardBack, "wolverine");
+		wolverine1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                wolverine1.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(wolverine1);
+                cardOpen(wolverine1);
+            }
+        });
+
 		wonderwoman1 = new Card(imageMap.get("wonderwoman"), cardBack, "wonderwoman");
+		wonderwoman1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                wonderwoman1.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(wonderwoman1);
+                cardOpen(wonderwoman1);
+            }
+        });
+
 		batman2 = new Card(imageMap.get("batman"), cardBack, "batman");
+		batman2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                batman2.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(batman2);
+                cardOpen(batman2);
+            }
+        });
+
 		carnage2 = new Card(imageMap.get("carnage"), cardBack, "carnage");
+		carnage2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                carnage2.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(carnage2);
+                cardOpen(carnage2);
+            }
+        });
+
 		catwoman2 = new Card(imageMap.get("catwoman"), cardBack, "catwoman");
-		drdoom2 = new Card(imageMap.get("drdoom"), cardBack, "drdoom");
-		goomba2 = new Card(imageMap.get("goomba"), cardBack, "goomba");
-		hulk2 = new Card(imageMap.get("hulk"), cardBack, "hulk");
-		ironman2 = new Card(imageMap.get("ironman"), cardBack, "ironman");
-		joker2 = new Card(imageMap.get("joker"), cardBack, "joker");
-		magneto2 = new Card(imageMap.get("magneto"), cardBack, "magneto");
-		maleficent2 = new Card(imageMap.get("maleficent"), cardBack, "maleficent");
-		mario2 = new Card(imageMap.get("mario"), cardBack, "mario");
-		penguin2 = new Card(imageMap.get("penguin"), cardBack, "penguin");
-		redskull2 = new Card(imageMap.get("redskull"), cardBack, "redskull");
-		spiderman2 = new Card(imageMap.get("spiderman"), cardBack, "spiderman");
-		thor2 = new Card(imageMap.get("thor"), cardBack, "thor");
-		venom2 = new Card(imageMap.get("venom"), cardBack, "venom");
-		wolverine2 = new Card(imageMap.get("wolverine"), cardBack, "wolverine");
-		wonderwoman2 = new Card(imageMap.get("wonderwoman"), cardBack, "wonderwoman");
+		catwoman2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                catwoman2.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(catwoman2);
+                cardOpen(catwoman2);
+            }
+        });
 		
+		drdoom2 = new Card(imageMap.get("drdoom"), cardBack, "drdoom");
+		drdoom2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                drdoom2.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(drdoom2);
+                cardOpen(drdoom2);
+            }
+        });
+
+		goomba2 = new Card(imageMap.get("goomba"), cardBack, "goomba");
+		goomba2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                goomba2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(goomba2);
+                cardOpen(goomba2);
+            }
+        });
+
+		hulk2 = new Card(imageMap.get("hulk"), cardBack, "hulk");
+		hulk2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                hulk2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(hulk2);
+                cardOpen(hulk2);
+            }
+        });
+
+		ironman2 = new Card(imageMap.get("ironman"), cardBack, "ironman");
+		ironman2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                ironman2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(ironman2);
+                cardOpen(ironman2);
+            }
+        });
+
+		joker2 = new Card(imageMap.get("joker"), cardBack, "joker");
+		joker2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                joker2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(joker2);
+                cardOpen(joker2);
+            }
+        });
+
+		magneto2 = new Card(imageMap.get("magneto"), cardBack, "magneto");
+		magneto2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                magneto2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(magneto2);
+                cardOpen(magneto2);
+            }
+        });
+
+		maleficent2 = new Card(imageMap.get("maleficent"), cardBack, "maleficent");
+		maleficent2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                maleficent2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(maleficent2);
+                cardOpen(maleficent2);
+            }
+        });
+
+		mario2 = new Card(imageMap.get("mario"), cardBack, "mario");
+		mario2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                mario2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(mario2);
+                cardOpen(mario2);
+            }
+        });
+
+		penguin2 = new Card(imageMap.get("penguin"), cardBack, "penguin");
+		penguin2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                penguin2.showFront();
+            	if(openCards.size() == 2) closeCards();
+                openCards.add(penguin2);
+                cardOpen(penguin2);
+            }
+        });
+
+		redskull2 = new Card(imageMap.get("redskull"), cardBack, "redskull");
+		redskull2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                redskull2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(redskull2);
+                cardOpen(redskull2);
+            }
+        });
+
+		spiderman2 = new Card(imageMap.get("spiderman"), cardBack, "spiderman");
+		spiderman2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                spiderman2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(spiderman2);
+                cardOpen(spiderman2);
+            }
+        });
+
+		thor2 = new Card(imageMap.get("thor"), cardBack, "thor");
+		thor2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                thor2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(thor2);
+                cardOpen(thor2);
+            }
+        });
+
+		venom2 = new Card(imageMap.get("venom"), cardBack, "venom");
+		venom2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                venom2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(venom2);
+                cardOpen(venom2);
+            }
+        });
+
+		wolverine2 = new Card(imageMap.get("wolverine"), cardBack, "wolverine");
+		wolverine2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                wolverine2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(wolverine2);
+                cardOpen(wolverine2);
+            }
+        });
+
+		wonderwoman2 = new Card(imageMap.get("wonderwoman"), cardBack, "wonderwoman");
+		wonderwoman2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                wonderwoman2.showFront();
+            	if(openCards.size() == 2) closeCards();
+            	openCards.add(wonderwoman2);
+                cardOpen(wonderwoman2);
+            }
+        });
+
 		cardList.add(batman1);
 		cardList.add(carnage1);
 		cardList.add(catwoman1);
@@ -353,6 +678,20 @@ public class GameWindow extends JFrame {
         GameFrame.getContentPane().setLayout(GameFrameLayout);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(new Dimension(1000, 400));
+	}
+
+	public void cardOpen(Card card){
+		System.out.println("clicked card");
+		System.out.println(card.type);
+		//card.showBack();
+		repaint();
+	}
+
+	public void closeCards(){
+		openCards.get(0).showBack();
+		openCards.get(1).showBack();
+		openCards = new ArrayList<Card>();
+		repaint();
 	}
 	
 	public void initCoor(){
