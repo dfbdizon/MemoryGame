@@ -14,12 +14,14 @@ public class GameWindow extends JFrame {
     private JFrame GameFrame;
     public JButton ReadyButton;
     private JButton StartButton;
+	public JTextField textfield;
 	public JPanel GamePanel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
 	public ArrayList<Card> openCards = new ArrayList<Card>(2);
 	public boolean showReadyButton;
+	public String clientName;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -72,7 +74,7 @@ public class GameWindow extends JFrame {
 		
 		lookFeel();
 		cursorSetting();
-		musicSetting();
+		//musicSetting();
         initComponents();
 		
     }
@@ -622,7 +624,7 @@ public class GameWindow extends JFrame {
 		ReadyButton.setBorder(BorderFactory.createEmptyBorder());
 		ReadyButton.setContentAreaFilled(false);
 		getContentPane().add(ReadyButton);
-        ReadyButton.setBounds(500, 310, 140, 70);
+        ReadyButton.setBounds(600, 310, 140, 70);
 		ReadyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 ReadyButtonActionPerformed(evt);
@@ -632,8 +634,13 @@ public class GameWindow extends JFrame {
 			ReadyButton.setVisible(true);
 		}
 		else{
-			ReadyButton.setVisible(false);
+			ReadyButton.setVisible(true);
 		}
+		textfield = new JTextField();
+		textfield.setFont(new Font("Arial", Font.BOLD,30));
+		textfield.setText("Enter your name!");
+		textfield.setBounds(200, 310, 400, 70);
+		getContentPane().add(textfield);
 	}
 	
 
@@ -674,7 +681,11 @@ public class GameWindow extends JFrame {
 	private void ReadyButtonActionPerformed(ActionEvent evt) {                                            
         // TODO add your handling code here:
 		//let game panel be visible
+		clientName = textfield.getText().trim();
+		setTitle("CS 145 MP 2 - " + clientName);
+		st.sendMessage("Name: " + clientName);
 		ReadyButton.setVisible(false);
+		textfield.setVisible(false);
 		gamePanel();
 		
     }  
