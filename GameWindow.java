@@ -12,7 +12,7 @@ import java.io.*;
 public class GameWindow extends JFrame {
 	                  
     private JFrame GameFrame;
-    private JButton HelpButton;
+    private JButton ReadyButton;
     private JButton StartButton;
 	private JPanel GamePanel;
 	public ArrayList<Card> cardList;
@@ -75,11 +75,9 @@ public class GameWindow extends JFrame {
     private void initComponents() {
 
         GameFrame = new JFrame();
-        StartButton = new JButton();
-        HelpButton = new JButton();
+        ReadyButton = new JButton();
 		
 		setTitle("CS 142 MP2");
-		setBackgroundDisplay("assets/bg.png");
 		setResizable(false);
 
         layoutSetting();
@@ -218,6 +216,8 @@ public class GameWindow extends JFrame {
 	}
 	
 	public void startPanel(){
+	    StartButton = new JButton();
+		setBackgroundDisplay("assets/bg.png");
 		Icon sb=new ImageIcon("assets/startbutton.png");
 		StartButton.setIcon(sb);
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
@@ -229,28 +229,20 @@ public class GameWindow extends JFrame {
                 StartButtonActionPerformed(evt);
             }
         });
-
-		Icon hb=new ImageIcon("assets/helpbutton.png");
-		HelpButton.setIcon(hb);
-		HelpButton.setBorder(BorderFactory.createEmptyBorder());
-		HelpButton.setContentAreaFilled(false);
-		getContentPane().add(HelpButton);
-        HelpButton.setBounds(500, 310, 140, 70);
-		HelpButton.addActionListener(new ActionListener() {
+	}
+	
+	public void readyPanel(){
+		ReadyButton = new JButton();
+		setBackgroundDisplay("assets/green.jpg");
+		Icon rb=new ImageIcon("assets/helpbutton.png");
+		ReadyButton.setIcon(rb);
+		ReadyButton.setBorder(BorderFactory.createEmptyBorder());
+		ReadyButton.setContentAreaFilled(false);
+		getContentPane().add(ReadyButton);
+        ReadyButton.setBounds(500, 310, 140, 70);
+		ReadyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                HelpButtonActionPerformed(evt);
-            }
-        });
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(null);
-		
-		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                st.stopNow();
-				lt.stopNow();
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                ReadyButtonActionPerformed(evt);
             }
         });
 	}
@@ -284,13 +276,15 @@ public class GameWindow extends JFrame {
         // TODO add your handling code here:
 		//let game panel be visible
 		StartButton.setVisible(false);
-		HelpButton.setVisible(false);
-		gamePanel();
+		readyPanel();
     }  
 
-	private void HelpButtonActionPerformed(ActionEvent evt) {                                            
+	private void ReadyButtonActionPerformed(ActionEvent evt) {                                            
         // TODO add your handling code here:
-		//let help panel be visible
+		//let game panel be visible
+		ReadyButton.setVisible(false);
+		gamePanel();
+		
     }  
 	
 	public void stopNow(){
@@ -333,6 +327,18 @@ public class GameWindow extends JFrame {
 		GroupLayout GameFrameLayout = new GroupLayout(GameFrame.getContentPane());
         GameFrame.getContentPane().setLayout(GameFrameLayout);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(null);
+		
+		addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                st.stopNow();
+				lt.stopNow();
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+        });
 	}
 	
 }
