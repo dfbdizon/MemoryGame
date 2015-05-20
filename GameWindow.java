@@ -118,7 +118,7 @@ public class GameWindow extends JFrame {
 		Collections.shuffle(cardList);
 
 		ImageIcon readyImg = new ImageIcon("assets/ready.png");
-		JLabel readyLabel = new JLabel();
+		final JLabel readyLabel = new JLabel();
 		readyLabel.setIcon(readyImg);
 		readyLabel.setBounds(300, 215, 330, 240);
 		getContentPane().add(readyLabel);
@@ -761,7 +761,7 @@ public class GameWindow extends JFrame {
 		textfield.setVisible(false);
 		gamePanel();
 		System.out.println("Im " + clientName);
-		
+		st.sendMessage("Client: Ready");
     }  
 	
 	public void stopNow(){
