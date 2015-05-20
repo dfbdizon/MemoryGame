@@ -80,7 +80,7 @@ public class GameWindow extends JFrame {
 		
 		lookFeel();
 		cursorSetting();
-		//musicSetting();
+		musicSetting();
         initComponents();
 		
     }
@@ -726,7 +726,7 @@ public class GameWindow extends JFrame {
 	public void musicSetting(){
 		try
 		{
-			URL url = this.getClass().getClassLoader().getResource("assets/music/starwars.wav");
+			URL url = this.getClass().getClassLoader().getResource("assets/music/mario.mp3");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
 			Clip clip = AudioSystem.getClip();
 		 
