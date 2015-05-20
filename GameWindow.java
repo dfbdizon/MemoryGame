@@ -25,6 +25,7 @@ public class GameWindow extends JFrame {
 	public boolean showReadyButton;
 	public String clientName;
 	public JLabel yourScore;
+	public JLabel opponents;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -90,6 +91,8 @@ public class GameWindow extends JFrame {
 		GamePanel.setVisible(false);
         ReadyButton = new JButton();
 		showReadyButton = false;
+		opponents = new JLabel();
+		opponents.setVisible(false);
 		
 		setTitle("CS 142 MP2");
 		setResizable(false);
@@ -134,29 +137,34 @@ public class GameWindow extends JFrame {
 			x = coor.get(i+1).getX();
 			y = coor.get(i+1).getY();
 			card.setBounds(x, y, 100, 100);
-			//GamePanel.add(card);
 			getContentPane().add(card);
 		}
-		//GamePanel.setVisible(true);
-
+		
+		JPanel sidePanel = new JPanel();	
+		sidePanel.setOpaque(false);
+		sidePanel.setLayout(null);
+		sidePanel.setBounds(830, 10, 267, 650);
+		getContentPane().add(sidePanel);
+		
+		
 		ImageIcon scoreImg = new ImageIcon("assets/score_panel2.png");
 		JLabel scorePanel = new JLabel();
 		scorePanel.setIcon(scoreImg);
-		/*JPanel scorePanel = new JPanel();
-		try{
-			BufferedImage scoreImg = ImageIO.read(new File("assets/score_panel2.png"));
-			JLabel picLabel = new JLabel(new ImageIcon(scoreImg));
-			scorePanel.add(picLabel);
-		} catch(Exception e){
-			e.printStackTrace();
-		}*/
-
-		scorePanel.setBounds(830, 10, 267, 650);
-		getContentPane().add(scorePanel);
+		scorePanel.setBounds(0, 0, 267, 650);
 		
-		yourScore = new JLabel("36");
-		yourScore.setBounds(850, 25, 100, 100);
-		scorePanel.add(yourScore);
+		yourScore = new JLabel("00");
+		yourScore.setForeground(new Color(26, 76, 30));
+		yourScore.setFont(new Font("Calibri", Font.BOLD,90));
+		yourScore.setBounds(88, 90, 100, 100);
+		
+		opponents.setVisible(true);
+		opponents.setForeground(Color.WHITE);
+		opponents.setFont(new Font("Calibri", Font.PLAIN,25));
+		opponents.setBounds(70, 100, 267, 500);
+		
+		sidePanel.add(yourScore);
+		sidePanel.add(opponents);
+		sidePanel.add(scorePanel);
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 	        public void run() {
@@ -169,10 +177,24 @@ public class GameWindow extends JFrame {
 				} catch (Exception e){
 					e.printStackTrace();
 				}
+				startGame();
         	}
     	});
-    	startGame();
 	}
+	
+	public void setOpponentsList(String opps){
+		String[] oppArr = opps.split("-new-");
+		String oppList = "";
+		for(int x = 0; x < oppArr.length; x++){
+			if(!oppArr[x].contains(clientName)){
+				oppList = oppList + oppArr[x] + "<br>";
+			}
+		}		
+		System.out.println("Opponents: \n" + oppList);
+		opponents.setText("<html>" + oppList + "</html>");
+		repaint();
+	}
+	
 	
 	private void setImages(){
 		ImageIcon batman = new ImageIcon("assets/cards/batman.png");
@@ -685,7 +707,7 @@ public class GameWindow extends JFrame {
 			ReadyButton.setVisible(true);
 		}
 		else{
-			ReadyButton.setVisible(true);
+			ReadyButton.setVisible(false);
 		}
 		textfield = new JTextField();
 		textfield.setFont(new Font("Arial", Font.BOLD,30));
@@ -738,6 +760,7 @@ public class GameWindow extends JFrame {
 		ReadyButton.setVisible(false);
 		textfield.setVisible(false);
 		gamePanel();
+		System.out.println("Im " + clientName);
 		
     }  
 	
@@ -813,6 +836,13 @@ public class GameWindow extends JFrame {
 						openCards.get(0).setVisible(false);
 						openCards.get(1).setVisible(false);
 						st.sendMessage("score: " + score);
+						
+						String scoreString = String.valueOf(score);
+						if(scoreString.length() == 1){
+							scoreString = "0" + scoreString;
+						}
+						yourScore.setText(scoreString);
+						repaint();
 					}
 				}
         	}

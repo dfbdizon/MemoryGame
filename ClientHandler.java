@@ -12,7 +12,8 @@ public class ClientHandler extends Thread{
 		this.mc = new MyConnection(socket);
 		this.clientName = clientName;
 		this.server = server;
-//		changeClientWindow(clientName);
+		clientScore = 0;
+		changeClientWindow(clientName);
 	}
 	
 	public void changeClientName(String newName){
@@ -25,6 +26,10 @@ public class ClientHandler extends Thread{
 		server.updateClientList();
 	}
 	
+	public void changeClientWindow(String client){
+		mc.sendMessage("<windowtitle> " + client);
+	}
+	
 	public void run(){
 		boolean ongoing = true;
 		
@@ -34,7 +39,7 @@ public class ClientHandler extends Thread{
 			if(msg.equals("/quit")){
 				ongoing = false;
 				mc.sendMessage("end");
-			//	server.removeClient(this);
+				server.removeClient(this);
 			}
 			else{
 				evaluate(msg);
@@ -45,7 +50,7 @@ public class ClientHandler extends Thread{
 	public void evaluate(String mesg){
 		String msg = mesg.trim();
 		if(msg.startsWith("Name: ")){
-			String newName = msg.substring(7);
+			String newName = msg.substring(6);
 			changeClientName(newName);
 		}
 		else if(msg.equals("Client: Start")){
@@ -55,19 +60,6 @@ public class ClientHandler extends Thread{
 			int clientScore = Integer.valueOf(msg.substring(7));
 			changeClientScore(clientScore);
 		}
-		else{
-			//server.announce(clientName + ": " + msg);
-		}
-	/*	else if(msg.startsWith("/changestatus ")){
-			if(msg.length() == 14){
-				sendMessage("Server message: No status found");
-			}
-			else{
-				String newStatus = msg.substring(14);
-				server.announce("Server message: " + clientName + " has changed status to \"" + newStatus + "\"");
-				changeClientStatus(newStatus);
-			}
-		}*/
 	}
 	
 	public void changeName(String msg){
