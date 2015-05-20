@@ -25,6 +25,7 @@ public class GameWindow extends JFrame {
 	public boolean showReadyButton;
 	public String clientName;
 	public JLabel yourScore;
+	public JLabel opponents;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -89,6 +90,8 @@ public class GameWindow extends JFrame {
 		GamePanel.setVisible(false);
         ReadyButton = new JButton();
 		showReadyButton = false;
+		opponents = new JLabel();
+		opponents.setVisible(false);
 		
 		setTitle("CS 142 MP2");
 		setResizable(false);
@@ -146,7 +149,13 @@ public class GameWindow extends JFrame {
 		yourScore.setFont(new Font("Calibri", Font.BOLD,90));
 		yourScore.setBounds(88, 90, 100, 100);
 		
+		opponents.setVisible(true);
+		opponents.setForeground(Color.WHITE);
+		opponents.setFont(new Font("Calibri", Font.PLAIN,25));
+		opponents.setBounds(70, 100, 267, 500);
+		
 		sidePanel.add(yourScore);
+		sidePanel.add(opponents);
 		sidePanel.add(scorePanel);
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -160,6 +169,20 @@ public class GameWindow extends JFrame {
         	}
     	});
 	}
+	
+	public void setOpponentsList(String opps){
+		String[] oppArr = opps.split("-new-");
+		String oppList = "";
+		for(int x = 0; x < oppArr.length; x++){
+			if(!oppArr[x].contains(clientName)){
+				oppList = oppList + oppArr[x] + "<br>";
+			}
+		}		
+		System.out.println("Opponents: \n" + oppList);
+		opponents.setText("<html>" + oppList + "</html>");
+		repaint();
+	}
+	
 	
 	private void setImages(){
 		ImageIcon batman = new ImageIcon("assets/cards/batman.png");
@@ -672,7 +695,7 @@ public class GameWindow extends JFrame {
 			ReadyButton.setVisible(true);
 		}
 		else{
-			ReadyButton.setVisible(true);
+			ReadyButton.setVisible(false);
 		}
 		textfield = new JTextField();
 		textfield.setFont(new Font("Arial", Font.BOLD,30));
@@ -725,6 +748,7 @@ public class GameWindow extends JFrame {
 		ReadyButton.setVisible(false);
 		textfield.setVisible(false);
 		gamePanel();
+		System.out.println("Im " + clientName);
 		
     }  
 	
