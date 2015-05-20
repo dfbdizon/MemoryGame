@@ -673,13 +673,13 @@ public class GameWindow extends JFrame {
 	
 	public void startPanel(){
 	    StartButton = new JButton();
-		setBackgroundDisplay("assets/bg.png");
+		setBackgroundDisplay("assets/levelup.jpg");
 		Icon sb=new ImageIcon("assets/startbutton.png");
 		StartButton.setIcon(sb);
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
 		StartButton.setContentAreaFilled(false);
 		getContentPane().add(StartButton);
-        StartButton.setBounds(300, 310, 140, 70);
+        StartButton.setBounds(370, 415, 390, 130);
         StartButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 StartButtonActionPerformed(evt);
@@ -690,12 +690,12 @@ public class GameWindow extends JFrame {
 	public void readyPanel(){
 		ReadyButton = new JButton();
 		setBackgroundDisplay("assets/green.jpg");
-		Icon rb=new ImageIcon("assets/helpbutton.png");
+		Icon rb=new ImageIcon("assets/readybutton.png");
 		ReadyButton.setIcon(rb);
 		ReadyButton.setBorder(BorderFactory.createEmptyBorder());
 		ReadyButton.setContentAreaFilled(false);
 		getContentPane().add(ReadyButton);
-        ReadyButton.setBounds(600, 310, 140, 70);
+        ReadyButton.setBounds(450, 500, 250, 90);
 		ReadyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 ReadyButtonActionPerformed(evt);
@@ -708,9 +708,10 @@ public class GameWindow extends JFrame {
 			ReadyButton.setVisible(false);
 		}
 		textfield = new JTextField();
-		textfield.setFont(new Font("Arial", Font.BOLD,30));
+		textfield.setFont(new Font("Calibri", Font.BOLD,30));
 		textfield.setText("Enter your name!");
-		textfield.setBounds(200, 310, 400, 70);
+		textfield.setBounds(375, 410, 400, 70);
+		textfield.setHorizontalAlignment(JLabel.CENTER);
 		getContentPane().add(textfield);
 	}
 	
