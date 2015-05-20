@@ -23,6 +23,7 @@ public class GameWindow extends JFrame {
 	public ArrayList<Card> openCards = new ArrayList<Card>(2);
 	public boolean showReadyButton;
 	public String clientName;
+	public JLabel yourScore;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -143,6 +144,10 @@ public class GameWindow extends JFrame {
 		waitPanel.setIcon(waitBox);
 		waitPanel.setBounds(300, 215, 330, 240);
 		getContentPane().add(waitPanel);
+		
+		yourScore = new JLabel("36");
+		yourScore.setBounds(850, 25, 100, 100);
+		scorePanel.add(yourScore);
 	}
 	
 	private void setImages(){

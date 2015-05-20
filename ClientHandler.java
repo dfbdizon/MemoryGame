@@ -52,7 +52,7 @@ public class ClientHandler extends Thread{
 			server.addPlayer();
 		}
 		else if(msg.startsWith("score: ")){
-			int clientScore = msg.substring(8);
+			int clientScore = Integer.valueOf(msg.substring(7));
 			changeClientScore(clientScore);
 		}
 		else{
