@@ -31,8 +31,6 @@ public class MyServer {
 				ClientHandler ch = new ClientHandler(s, clientName, this);
 				ch.start();
 				clientList.add(ch);
-				announce(clientName + " has connected.");
-				updateClientList();
 			}
 			
 		} catch(Exception e) {
@@ -61,6 +59,8 @@ public class MyServer {
 		if(numberOfReadyPlayers == 1){
 			setSessionPlayers();
 		}
+		
+		updateClientList();
 	}
 	
 	public void setSessionPlayers(){
@@ -77,9 +77,13 @@ public class MyServer {
 	
 	public void updateClientList(){
 		String clients = "";
+		int counter = 1;
 		for(ClientHandler ch: clientList){
-			clients = clients + ch.clientName;
-			clients = clients + " - " + ch.clientScore + "*";
+			clients = clients + ch.clientName + " - " + ch.clientScore;
+			if(counter < clientList.size()){
+				clients = clients + "-new-";
+			}
+			counter++;
 		}
 		String updatedClientList = "<clients> " + clients;
 		announce(updatedClientList);

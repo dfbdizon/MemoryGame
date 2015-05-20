@@ -27,17 +27,15 @@ public class ListeningThread extends Thread{
 				}
 				gw.showReadyButton = true;
 			}
-		/*	else if(reply.startsWith("<windowtitle> ")){
-				String title = reply.substring(14);
-				gw.setTitle(title);
-			}
 			else if(reply.startsWith("<clients> ")){
 				String clientList = reply.substring(10);
-				gw.setClientList(clientList);
+				gw.setOpponentsList(clientList);
 			}
-			else{
-				gw.displayMessages(reply);
-			}*/
+			else if(reply.startsWith("<windowtitle> ")){
+				String player = reply.substring(14);
+				gw.clientName = player;
+				System.out.println("Im " + player);
+			}
 		}
 
 	}
