@@ -831,6 +831,10 @@ public class GameWindow extends JFrame {
 						}
 						yourScore.setText(scoreString);
 						repaint();
+						
+						if(score == 36){
+							endGame();
+						}
 					}
 				}
         	}
@@ -905,5 +909,9 @@ public class GameWindow extends JFrame {
 		coor.put(34, new Coordinates(420, 560));
 		coor.put(35, new Coordinates(530, 560));
 		coor.put(36, new Coordinates(640, 560));
+	}
+	
+	public void endGame(){
+		st.sendMessage("winner: " + clientName);
 	}
 }

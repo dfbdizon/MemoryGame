@@ -60,6 +60,9 @@ public class ClientHandler extends Thread{
 			int clientScore = Integer.valueOf(msg.substring(7));
 			changeClientScore(clientScore);
 		}
+		else if(msg.startsWith("winner: ")){
+			server.announce(msg);
+		}
 	}
 	
 	public void changeName(String msg){
