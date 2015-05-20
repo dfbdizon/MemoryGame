@@ -17,7 +17,7 @@ public class GameWindow extends JFrame {
     private JButton StartButton;
 	public JTextField textfield;
 	public JPanel GamePanel;
-	public JLabel gifLabel;
+	public JLabel goLabel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
@@ -117,18 +117,11 @@ public class GameWindow extends JFrame {
 
 		Collections.shuffle(cardList);
 
-		ImageIcon readyImg = new ImageIcon("assets/ready.png");
-		JLabel readyLabel = new JLabel();
-		readyLabel.setIcon(readyImg);
-		readyLabel.setBounds(300, 215, 330, 240);
-		getContentPane().add(readyLabel);
-
-		ImageIcon gifImg = new ImageIcon("assets/readysetgo.gif");
-		gifLabel = new JLabel();
-		gifLabel.setIcon(gifImg);
-		gifLabel.setBounds(300, 215, 330, 240);
-		gifLabel.setVisible(false);
-		getContentPane().add(gifLabel);
+		ImageIcon goImg = new ImageIcon("assets/go.png");
+		goLabel = new JLabel();
+		goLabel.setIcon(goImg);
+		goLabel.setBounds(300, 215, 330, 240);
+		getContentPane().add(goLabel);
 
 		//GamePanel.setLayout(null);
 		//GamePanel.setBounds(0, 0, 1117, 670);
@@ -170,9 +163,6 @@ public class GameWindow extends JFrame {
 	        public void run() {
 	            try{
 	            	Thread.sleep(1000);
-					readyLabel.setVisible(false);
-					gifLabel.setVisible(true);
-					startGame = true;
 					//repaint();
 				} catch (Exception e){
 					e.printStackTrace();
@@ -865,19 +855,8 @@ public class GameWindow extends JFrame {
 		for(Card card: cardList){
 			card.enableButton();
 		}
-		//repaint();
-		java.awt.EventQueue.invokeLater(new Runnable() {
-	        public void run() {
-	            try{
-	            	Thread.sleep(1000);
-	            	if(startGame){
-	            		gifLabel.setVisible(false);
-	            	}
-				} catch (Exception e){
-					e.printStackTrace();
-				}
-        	}
-    	});
+		goLabel.setVisible(false);
+		repaint();
 	}
 	
 	public void initCoor(){
