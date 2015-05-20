@@ -17,7 +17,7 @@ public class GameWindow extends JFrame {
     private JButton StartButton;
 	public JTextField textfield;
 	public JPanel GamePanel;
-	public JLabel waitPanel;
+	public JLabel gifLabel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
@@ -30,6 +30,7 @@ public class GameWindow extends JFrame {
 	SendingThread st;
 	
 	int score = 0;
+	boolean startGame = false;
 
 	//cards
 	Card batman1;
@@ -113,11 +114,18 @@ public class GameWindow extends JFrame {
 
 		Collections.shuffle(cardList);
 
-		ImageIcon waitBox = new ImageIcon("assets/test.png");
-		waitPanel = new JLabel();
-		waitPanel.setIcon(waitBox);
-		waitPanel.setBounds(300, 215, 330, 240);
-		getContentPane().add(waitPanel);
+		ImageIcon readyImg = new ImageIcon("assets/ready.png");
+		JLabel readyLabel = new JLabel();
+		readyLabel.setIcon(readyImg);
+		readyLabel.setBounds(300, 215, 330, 240);
+		getContentPane().add(readyLabel);
+
+		ImageIcon gifImg = new ImageIcon("assets/readysetgo.gif");
+		gifLabel = new JLabel();
+		gifLabel.setIcon(gifImg);
+		gifLabel.setBounds(300, 215, 330, 240);
+		gifLabel.setVisible(false);
+		getContentPane().add(gifLabel);
 
 		//GamePanel.setLayout(null);
 		//GamePanel.setBounds(0, 0, 1117, 670);
@@ -153,13 +161,17 @@ public class GameWindow extends JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 	        public void run() {
 	            try{
-					Thread.sleep(5000);
+	            	Thread.sleep(1000);
+					readyLabel.setVisible(false);
+					gifLabel.setVisible(true);
+					startGame = true;
+					//repaint();
 				} catch (Exception e){
 					e.printStackTrace();
 				}
-				startGame();
         	}
     	});
+    	startGame();
 	}
 	
 	private void setImages(){
@@ -823,8 +835,19 @@ public class GameWindow extends JFrame {
 		for(Card card: cardList){
 			card.enableButton();
 		}
-		waitPanel.setVisible(false);
-		repaint();
+		//repaint();
+		java.awt.EventQueue.invokeLater(new Runnable() {
+	        public void run() {
+	            try{
+	            	Thread.sleep(1000);
+	            	if(startGame){
+	            		gifLabel.setVisible(false);
+	            	}
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+        	}
+    	});
 	}
 	
 	public void initCoor(){
