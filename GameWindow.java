@@ -137,6 +137,12 @@ public class GameWindow extends JFrame {
 
 		scorePanel.setBounds(830, 10, 267, 650);
 		getContentPane().add(scorePanel);
+
+		ImageIcon waitBox = new ImageIcon("assets/test.png")
+		JLabel waitPanel = new JLabel();
+		waitPanel.setIcon(waitBox);
+		waitPanel.setBounds(300, 215, 330, 240);
+		getContentPane().add(waitPanel);
 	}
 	
 	private void setImages(){
