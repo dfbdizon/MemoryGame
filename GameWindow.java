@@ -15,10 +15,13 @@ public class GameWindow extends JFrame {
     private JFrame GameFrame;
     public JButton ReadyButton;
     private JButton StartButton;
+	private JButton playAgainButton;
 	public JTextField textfield;
 	public JPanel GamePanel;
+	public JPanel sidePanel;
 	public JLabel goLabel;
 	public JLabel loseLabel;
+	public JLabel winLabel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
@@ -124,6 +127,28 @@ public class GameWindow extends JFrame {
 		goLabel.setBounds(300, 215, 330, 240);
 		getContentPane().add(goLabel);
 
+		ImageIcon playagainImg = new ImageIcon("assets/playagain.png");
+		playAgainButton = new JButton();
+		playAgainButton.setIcon(playagainImg);
+		playAgainButton.setBorder(BorderFactory.createEmptyBorder());
+		playAgainButton.setContentAreaFilled(false);
+		playAgainButton.setBounds(347, 360, 155, 55);
+		playAgainButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                playAgainButtonActionPerformed(evt);
+            }
+        });
+		playAgainButton.setVisible(false);
+		getContentPane().add(playAgainButton);
+		
+		ImageIcon winImg = new ImageIcon("assets/win.png");
+		winLabel = new JLabel();
+		winLabel.setIcon(winImg);
+		winLabel.setBounds(300, 215, 330, 240);
+		winLabel.setVisible(false);
+		getContentPane().add(winLabel);		
+		
+		
 		ImageIcon loseImg = new ImageIcon("assets/lose.png");
 		loseLabel = new JLabel();
 		loseLabel.setIcon(loseImg);
@@ -141,7 +166,7 @@ public class GameWindow extends JFrame {
 			getContentPane().add(card);
 		}
 		
-		JPanel sidePanel = new JPanel();	
+		sidePanel = new JPanel();	
 		sidePanel.setOpaque(false);
 		sidePanel.setLayout(null);
 		sidePanel.setBounds(830, 10, 267, 650);
@@ -763,6 +788,24 @@ public class GameWindow extends JFrame {
 		st.sendMessage("Client: Ready");
     }  
 	
+	 private void playAgainButtonActionPerformed(ActionEvent evt) {                                            
+        // TODO add your handling code here:
+		//let game panel be visible
+		System.out.println("Play again button pressed");
+		loseLabel.setVisible(false);
+		winLabel.setVisible(false);
+		playAgainButton.setVisible(false);
+		sidePanel.setVisible(false);
+		
+		for(int i = 0; i < cardList.size(); i++){
+			cardList.get(i).setVisible(false);
+		}
+		
+		st.sendMessage("Client: Start");
+		startPanel();
+		
+    } 
+	
 	public void stopNow(){
 		st.stopNow();
 		lt.stopNow();
@@ -924,16 +967,14 @@ public class GameWindow extends JFrame {
 	
 	public void endGame(){
 		st.sendMessage("winner: " + clientName);
-
-		ImageIcon winImg = new ImageIcon("assets/win.png");
-		JLabel winLabel = new JLabel();
-		winLabel.setIcon(winImg);
-		winLabel.setBounds(300, 215, 330, 240);
-		getContentPane().add(winLabel);		
+		
+		playAgainButton.setVisible(true);
+		winLabel.setVisible(true);
 	}
 
 	public void oppWins(String winner){
 		if(!winner.equals(clientName)){
+			playAgainButton.setVisible(true);
 			loseLabel.setVisible(true);	
 		}
 		for(Card card: cardList){
