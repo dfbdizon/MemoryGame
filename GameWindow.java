@@ -915,5 +915,11 @@ public class GameWindow extends JFrame {
 	
 	public void endGame(){
 		st.sendMessage("winner: " + clientName);
+
+		ImageIcon winImg = new ImageIcon("assets/win.png");
+		JLabel winLabel = new JLabel();
+		winLabel.setIcon(winImg);
+		winLabel.setBounds(300, 215, 330, 240);
+		getContentPane().add(winLabel);		
 	}
 }
