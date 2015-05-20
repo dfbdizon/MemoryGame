@@ -18,6 +18,7 @@ public class GameWindow extends JFrame {
 	public JTextField textfield;
 	public JPanel GamePanel;
 	public JLabel goLabel;
+	public JLabel loseLabel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
@@ -79,7 +80,7 @@ public class GameWindow extends JFrame {
 		
 		lookFeel();
 		cursorSetting();
-		//musicSetting();
+		musicSetting();
         initComponents();
 		
     }
@@ -122,6 +123,13 @@ public class GameWindow extends JFrame {
 		goLabel.setIcon(goImg);
 		goLabel.setBounds(300, 215, 330, 240);
 		getContentPane().add(goLabel);
+
+		ImageIcon loseImg = new ImageIcon("assets/lose.png");
+		loseLabel = new JLabel();
+		loseLabel.setIcon(loseImg);
+		loseLabel.setBounds(300, 215, 330, 240);
+		loseLabel.setVisible(false);
+		getContentPane().add(loseLabel);
 
 		//GamePanel.setLayout(null);
 		//GamePanel.setBounds(0, 0, 1117, 670);
@@ -719,7 +727,7 @@ public class GameWindow extends JFrame {
 	public void musicSetting(){
 		try
 		{
-			URL url = this.getClass().getClassLoader().getResource("assets/music/starwars.wav");
+			URL url = this.getClass().getClassLoader().getResource("assets/music/mario.mp3");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
 			Clip clip = AudioSystem.getClip();
 		 
@@ -916,5 +924,20 @@ public class GameWindow extends JFrame {
 	
 	public void endGame(){
 		st.sendMessage("winner: " + clientName);
+
+		ImageIcon winImg = new ImageIcon("assets/win.png");
+		JLabel winLabel = new JLabel();
+		winLabel.setIcon(winImg);
+		winLabel.setBounds(300, 215, 330, 240);
+		getContentPane().add(winLabel);		
+	}
+
+	public void oppWins(String winner){
+		if(!winner.equals(clientName)){
+			loseLabel.setVisible(true);	
+		}
+		for(Card card: cardList){
+			card.setEnabled(false);
+		}
 	}
 }
