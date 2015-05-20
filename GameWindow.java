@@ -801,7 +801,8 @@ public class GameWindow extends JFrame {
 			cardList.get(i).setVisible(false);
 		}
 		
-		st.sendMessage("Client: Start");
+		
+		isReady = false;
 		startPanel();
 		
     } 
