@@ -18,6 +18,7 @@ public class GameWindow extends JFrame {
 	private JButton playAgainButton;
 	public JTextField textfield;
 	public JPanel GamePanel;
+	public JPanel sidePanel;
 	public JLabel goLabel;
 	public JLabel loseLabel;
 	public JLabel winLabel;
@@ -128,8 +129,10 @@ public class GameWindow extends JFrame {
 
 		ImageIcon playagainImg = new ImageIcon("assets/playagain.png");
 		playAgainButton = new JButton();
-		playAgainButon.setIcon(winImg);
-		playAgainButton.setBounds(360, 250, 330, 240);
+		playAgainButton.setIcon(playagainImg);
+		playAgainButton.setBorder(BorderFactory.createEmptyBorder());
+		playAgainButton.setContentAreaFilled(false);
+		playAgainButton.setBounds(347, 360, 155, 55);
 		playAgainButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 playAgainButtonActionPerformed(evt);
@@ -163,7 +166,7 @@ public class GameWindow extends JFrame {
 			getContentPane().add(card);
 		}
 		
-		JPanel sidePanel = new JPanel();	
+		sidePanel = new JPanel();	
 		sidePanel.setOpaque(false);
 		sidePanel.setLayout(null);
 		sidePanel.setBounds(830, 10, 267, 650);
@@ -795,7 +798,7 @@ public class GameWindow extends JFrame {
 		sidePanel.setVisible(false);
 		
 		for(int i = 0; i < cardList.size(); i++){
-			cardList.get(i).setVisible(false)
+			cardList.get(i).setVisible(false);
 		}
 		
 		st.sendMessage("Client: Start");
@@ -965,8 +968,8 @@ public class GameWindow extends JFrame {
 	public void endGame(){
 		st.sendMessage("winner: " + clientName);
 		
-		winLabel.setVisible(true);
 		playAgainButton.setVisible(true);
+		winLabel.setVisible(true);
 	}
 
 	public void oppWins(String winner){
