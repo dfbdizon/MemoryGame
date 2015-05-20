@@ -20,6 +20,9 @@ public class ListeningThread extends Thread{
 				gw.stopNow();
 				ongoing = false;
 			}
+			if(reply.startsWith("winner: ")){
+				gw.oppWins(reply.substring(8));
+			}
 			else if(reply.equals("show play button")){
 				System.out.println("Show play button");
 				if(!gw.showReadyButton){
