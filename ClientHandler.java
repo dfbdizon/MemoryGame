@@ -62,6 +62,9 @@ public class ClientHandler extends Thread{
 			isReady = true;
 			server.updateClientList();
 		}
+		else if(msg.equals("Client: Not Ready")){
+			isReady = false;
+		}
 		else if(msg.startsWith("score: ")){
 			int clientScore = Integer.valueOf(msg.substring(7));
 			changeClientScore(clientScore);
