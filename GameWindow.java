@@ -116,7 +116,7 @@ public class GameWindow extends JFrame {
 		Card card;
 
 		Collections.shuffle(cardList);
-
+		
 		ImageIcon goImg = new ImageIcon("assets/go.png");
 		goLabel = new JLabel();
 		goLabel.setIcon(goImg);
@@ -751,7 +751,7 @@ public class GameWindow extends JFrame {
 		textfield.setVisible(false);
 		gamePanel();
 		System.out.println("Im " + clientName);
-		
+		st.sendMessage("Client: Ready");
     }  
 	
 	public void stopNow(){
@@ -833,6 +833,10 @@ public class GameWindow extends JFrame {
 						}
 						yourScore.setText(scoreString);
 						repaint();
+						
+						if(score == 36){
+							endGame();
+						}
 					}
 				}
         	}
@@ -907,5 +911,9 @@ public class GameWindow extends JFrame {
 		coor.put(34, new Coordinates(420, 560));
 		coor.put(35, new Coordinates(530, 560));
 		coor.put(36, new Coordinates(640, 560));
+	}
+	
+	public void endGame(){
+		st.sendMessage("winner: " + clientName);
 	}
 }

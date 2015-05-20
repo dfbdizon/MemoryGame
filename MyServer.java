@@ -79,9 +79,11 @@ public class MyServer {
 		String clients = "";
 		int counter = 1;
 		for(ClientHandler ch: clientList){
-			clients = clients + ch.clientName + " - " + ch.clientScore;
-			if(counter < clientList.size()){
-				clients = clients + "-new-";
+			if(ch.isReady){
+				clients = clients + ch.clientName + " - " + ch.clientScore;
+				if(counter < clientList.size()){
+					clients = clients + "-new-";
+				}
 			}
 			counter++;
 		}

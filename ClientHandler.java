@@ -7,6 +7,7 @@ public class ClientHandler extends Thread{
 	String clientName;
 	int clientScore;
 	MyServer server;
+	boolean isReady;
 	
 	public ClientHandler(Socket socket, String clientName, MyServer server){
 		this.mc = new MyConnection(socket);
@@ -14,6 +15,7 @@ public class ClientHandler extends Thread{
 		this.server = server;
 		clientScore = 0;
 		changeClientWindow(clientName);
+		isReady = false;
 	}
 	
 	public void changeClientName(String newName){
@@ -56,9 +58,16 @@ public class ClientHandler extends Thread{
 		else if(msg.equals("Client: Start")){
 			server.addPlayer();
 		}
+		else if(msg.equals("Client: Ready")){
+			isReady = true;
+			server.updateClientList();
+		}
 		else if(msg.startsWith("score: ")){
 			int clientScore = Integer.valueOf(msg.substring(7));
 			changeClientScore(clientScore);
+		}
+		else if(msg.startsWith("winner: ")){
+			server.announce(msg);
 		}
 	}
 	
