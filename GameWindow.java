@@ -802,7 +802,7 @@ public class GameWindow extends JFrame {
 		}
 		
 		
-		isReady = false;
+		st.sendMessage("Client: Not Ready");
 		startPanel();
 		
     } 
