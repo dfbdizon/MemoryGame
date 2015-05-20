@@ -16,7 +16,8 @@ class Card extends JButton{
 		this.type = type;
 		
 		setIcon(backImage);
-		setDisabledIcon(front);
+		setDisabledIcon(back);
+		setEnabled(false);
 		setMargin(new Insets(0, 0, 0, 0));
 		setIconTextGap(0);
 		setBorderPainted(false);
@@ -34,6 +35,11 @@ class Card extends JButton{
 	
 	public void showBack(){
 		setIcon(backImage);
+	}
+
+	public void enableButton(){
+		setDisabledIcon(frontImage);
+		setEnabled(true);
 	}
 
 }

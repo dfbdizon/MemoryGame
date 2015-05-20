@@ -17,6 +17,7 @@ public class GameWindow extends JFrame {
     private JButton StartButton;
 	public JTextField textfield;
 	public JPanel GamePanel;
+	public JLabel waitPanel;
 	public ArrayList<Card> cardList;
 	public HashMap<String, ImageIcon> imageMap;
 	public HashMap<Integer, Coordinates> coor = new HashMap<Integer, Coordinates>();
@@ -112,6 +113,12 @@ public class GameWindow extends JFrame {
 
 		Collections.shuffle(cardList);
 
+		ImageIcon waitBox = new ImageIcon("assets/test.png");
+		waitPanel = new JLabel();
+		waitPanel.setIcon(waitBox);
+		waitPanel.setBounds(300, 215, 330, 240);
+		getContentPane().add(waitPanel);
+
 		//GamePanel.setLayout(null);
 		//GamePanel.setBounds(0, 0, 1117, 670);
 		for(int i = 0; i < cardList.size(); i++){
@@ -141,6 +148,17 @@ public class GameWindow extends JFrame {
 		
 		sidePanel.add(yourScore);
 		sidePanel.add(scorePanel);
+
+		java.awt.EventQueue.invokeLater(new Runnable() {
+	        public void run() {
+	            try{
+					Thread.sleep(5000);
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+				startGame();
+        	}
+    	});
 	}
 	
 	private void setImages(){
@@ -805,6 +823,14 @@ public class GameWindow extends JFrame {
 		openCards = new ArrayList<Card>(2);
 		repaint();
 
+	}
+
+	public void startGame(){
+		for(Card card: cardList){
+			card.enableButton();
+		}
+		waitPanel.setVisible(false);
+		repaint();
 	}
 	
 	public void initCoor(){
