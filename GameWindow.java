@@ -165,6 +165,7 @@ public class GameWindow extends JFrame {
 			x = coor.get(i+1).getX();
 			y = coor.get(i+1).getY();
 			card.setBounds(x, y, 100, 100);
+			card.playAgain();
 			getContentPane().add(card);
 		}
 		
@@ -210,8 +211,10 @@ public class GameWindow extends JFrame {
 	public void setOpponentsList(String opps){
 		String[] oppArr = opps.split("-new-");
 		String oppList = "";
+		String oppName;
 		for(int x = 0; x < oppArr.length; x++){
-			if(!oppArr[x].contains(clientName)){
+			oppName = oppArr[x].split(" ")[0];
+			if(!oppName.equals(clientName)){
 				oppList = oppList + oppArr[x] + "<br>";
 			}
 		}		
@@ -818,7 +821,16 @@ public class GameWindow extends JFrame {
 			cardList.get(i).setVisible(false);
 		}
 		
-		
+		score = 0;
+
+		for(int i = 0; i < openCards.size(); i++){
+			openCards.get(i).showBack();
+			openCards.get(i).setEnabled(true);
+		}
+		while(openCards.size() > 0) openCards.remove(0);
+
+		openCards = new ArrayList<Card>(2);
+
 		st.sendMessage("Client: Not Ready");
 		startPanel();
 		

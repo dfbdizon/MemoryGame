@@ -77,15 +77,15 @@ public class MyServer {
 	
 	public void updateClientList(){
 		String clients = "";
-		int counter = 1;
+	//	int counter = 1;
 		for(ClientHandler ch: clientList){
 			if(ch.isReady){
 				clients = clients + ch.clientName + " - " + ch.clientScore;
-				if(counter < clientList.size()){
+		//		if(counter < clientList.size()){
 					clients = clients + "-new-";
-				}
+		//		}
 			}
-			counter++;
+		//	counter++;
 		}
 		String updatedClientList = "<clients> " + clients;
 		announce(updatedClientList);

@@ -42,4 +42,9 @@ class Card extends JButton{
 		setEnabled(true);
 	}
 
+	public void playAgain(){
+		setDisabledIcon(backImage);
+		setEnabled(false);
+		setVisible(true);
+	}
 }
