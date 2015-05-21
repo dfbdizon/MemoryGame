@@ -31,6 +31,7 @@ public class GameWindow extends JFrame {
 	public JLabel yourScore;
 	public JLabel opponents;
 	public JLabel howtoLabel;
+	public JLabel titleLabel;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -701,6 +702,13 @@ public class GameWindow extends JFrame {
 	    StartButton = new JButton();
 		setBackgroundDisplay("assets/levelup.jpg");
 		Icon sb=new ImageIcon("assets/startbutton.png");
+
+		ImageIcon titleImg = new ImageIcon("assets/sampletitle.png");
+		titleLabel = new JLabel();
+		titleLabel.setIcon(titleImg);
+		titleLabel.setBounds(232, 119, 687, 173);
+		getContentPane().add(titleLabel);
+
 		StartButton.setIcon(sb);
 		StartButton.setBorder(BorderFactory.createEmptyBorder());
 		StartButton.setContentAreaFilled(false);
@@ -722,8 +730,8 @@ public class GameWindow extends JFrame {
 		howtoLabel.setIcon(howtoImg);
 		howtoLabel.setBounds(155, 37, 836, 330);
 		getContentPane().add(howtoLabel);
-		Icon rb=new ImageIcon("assets/readybutton.png");
 
+		Icon rb=new ImageIcon("assets/readybutton.png");
 		ReadyButton.setIcon(rb);
 		ReadyButton.setBorder(BorderFactory.createEmptyBorder());
 		ReadyButton.setContentAreaFilled(false);
