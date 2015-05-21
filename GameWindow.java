@@ -30,6 +30,7 @@ public class GameWindow extends JFrame {
 	public String clientName;
 	public JLabel yourScore;
 	public JLabel opponents;
+	public JLabel howtoLabel;
 
 	ListeningThread lt;
 	SendingThread st;
@@ -715,7 +716,14 @@ public class GameWindow extends JFrame {
 	public void readyPanel(){
 		ReadyButton = new JButton();
 		setBackgroundDisplay("assets/green.jpg");
+
+		ImageIcon howtoImg = new ImageIcon("assets/howto.png");
+		howtoLabel = new JLabel();
+		howtoLabel.setIcon(howtoImg);
+		howtoLabel.setBounds(155, 37, 836, 330);
+		getContentPane().add(howtoLabel);
 		Icon rb=new ImageIcon("assets/readybutton.png");
+
 		ReadyButton.setIcon(rb);
 		ReadyButton.setBorder(BorderFactory.createEmptyBorder());
 		ReadyButton.setContentAreaFilled(false);
@@ -783,6 +791,7 @@ public class GameWindow extends JFrame {
 		st.sendMessage("Name: " + clientName);
 		ReadyButton.setVisible(false);
 		textfield.setVisible(false);
+		howtoLabel.setVisible(false);
 		gamePanel();
 		System.out.println("Im " + clientName);
 		st.sendMessage("Client: Ready");
